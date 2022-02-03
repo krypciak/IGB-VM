@@ -28,6 +28,7 @@ import me.krypek.freeargparser.ArgType;
 import me.krypek.freeargparser.ParsedData;
 import me.krypek.freeargparser.ParserBuilder;
 import me.krypek.igb.cl1.IGB_Compiler_L1;
+import me.krypek.igb.cl1.IGB_MA;
 import me.krypek.utils.Utils;
 
 public class IGB_VM {
