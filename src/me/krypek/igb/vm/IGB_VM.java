@@ -27,8 +27,10 @@ import javax.swing.JPanel;
 import me.krypek.freeargparser.ArgType;
 import me.krypek.freeargparser.ParsedData;
 import me.krypek.freeargparser.ParserBuilder;
-import me.krypek.igb.cl1.IGB_Compiler_L1;
+import me.krypek.igb.cl1.IGB_CL1;
+import me.krypek.igb.cl1.IGB_L1;
 import me.krypek.igb.cl1.IGB_MA;
+import me.krypek.igb.cl2.IGB_CL2;
 import me.krypek.utils.Utils;
 
 public class IGB_VM {
@@ -53,7 +55,7 @@ public class IGB_VM {
 				.add("wac", "waitAfterInstruction", false, false, ArgType.Int,  "If selected, will wait X nano seconds between each instruction.")
 				.add("fps", "fps", 		false, false, ArgType.Int, 			"Default: 60")
 				.add("ps", "PES_Size",false,   false, ArgType.Int, 			"PES size. Select if pes isn't selected. Default: 10000")
-
+				.add("ws", "workspaceFolder", false, false, ArgType.String, "Workspace folder") 
 				.parse(args);
 		//@f:on
 
@@ -70,16 +72,17 @@ public class IGB_VM {
 		final boolean rescaleFrame = !data.has("drsf");
 		final int wac = data.getIntOrDef("wac", 0);
 		final int fps = data.getIntOrDef("fps", 60);
+		final String ws = data.getStringOrDef("ws", null);
 
-		IGB_VM igbvm = new IGB_VM(500, 500, popup, rescaleFrame, fileLogPath, logTerminal, wac, saveRAM);
+		IGB_VM vm = new IGB_VM(500, 500, popup, rescaleFrame, fileLogPath, logTerminal, wac, saveRAM);
 
 		if(ramPath == null) {
-			igbvm.initRAM(ramSize);
+			vm.initRAM(ramSize);
 		} else {
 			int[] ram = Utils.deserialize(ramPath);
 			if(ram == null)
 				throw new IGB_VM_Exception("Error occured while deserializing RAM.");
-			igbvm.setRAM(ram);
+			vm.setRAM(ram);
 		}
 
 		// parsing
@@ -87,56 +90,100 @@ public class IGB_VM {
 			int[][] pes = Utils.deserialize(pesPath);
 			if(pes == null)
 				throw new IGB_VM_Exception("Error occured while deserializing PES.");
-			igbvm.setPES(pes);
+			vm.setPES(pes);
 		} else if(codePaths != null) {
-			igbvm.initPES(pesSize);
-			List<String> igb_l1_paths = new ArrayList<>();
-
+			List<String> fileNames = new ArrayList<>();
+			List<IGB_L1> l1_toCompile = new ArrayList<>();
+			List<String> l2_toCompile = new ArrayList<>();
+			List<String> l2_fileNames = new ArrayList<>();
 			for (String path : codePaths) {
-				String ext = Utils.getFileExtension(new File(path).getName());
-				if(ext.equals("igb_bin")) {
+				String ext = Utils.getFileExtension(Utils.getFileName(path));
+				String fileName = Utils.getFileNameWithoutExtension(Utils.getFileName(path));
+				switch (ext) {
+				case "igb_bin" -> {
 					int[][] binary = Utils.deserialize(path);
-					igbvm.parse(binary);
-				} else if(ext.equals("igb_bin_readble")) {
-					String[] arr = Utils.readFromFileToArray(path);
-					int[][] binary = new int[arr.length][];
-					for (int i = 0; i < arr.length; i++) {
-						String[] split = arr[i].split(" ");
-						binary[i] = new int[split.length];
-						for (int x = 0; x < split.length; x++)
-							binary[i][x] = Utils.parseInt(split[x]);
-					}
-					igbvm.parse(binary);
-				} else if(ext.equals("igb_l1")) {
-					igb_l1_paths.add(path);
-				} else if(ext.equals("igb_l2")) {
-
-				} else
-					throw new IGB_VM_Exception("Unsupported file extension: \"." + ext + "\"  File: \"" + path + "\".");
+					vm.parse(binary);
+					System.out.println("Parsed \"" + path + "\" into PES.");
+				}
+				case "igb_l1" -> {
+					IGB_L1 igbl1 = Utils.deserialize(path);
+					l1_toCompile.add(igbl1);
+					fileNames.add(fileName);
+				}
+				case "igb_l2" -> {
+					l2_toCompile.add(Utils.readFromFile(path, "\n"));
+					l2_fileNames.add(fileName);
+				}
+				default -> throw new IGB_VM_Exception("Unsupported file extension: \"." + ext + "\"  File: \"" + path + "\".");
+				}
 			}
 
-			if(igb_l1_paths.size() != 0) {
-				IGB_Compiler_L1 igb_cl1 = new IGB_Compiler_L1();
-				String[] pathA = igb_l1_paths.toArray(String[]::new);
-				String[][] inputs = new String[pathA.length][];
-				for (int i = 0; i < pathA.length; i++) {
-					String[] readden = Utils.readFromFileToArray(pathA[i]);
-					if(readden == null)
-						throw new IGB_VM_Exception("Error while reading from file: \"" + pathA[i] + "\".");
-					inputs[i] = readden;
-				}
+			assert l2_toCompile.size() == l2_fileNames.size();
 
-				int[][][] compiled = igb_cl1.compile(inputs, pathA, -1);
-				// System.out.println(Arrays.deepToString(compiled));
-				for (int i = 0; i < compiled.length; i++)
-					igbvm.parse(compiled[i]);
+			if(!l2_toCompile.isEmpty()) {
+				IGB_CL2 cl2 = new IGB_CL2();
+				String[] fileNames1 = l2_fileNames.toArray(String[]::new);
+				IGB_L1[] igbl1 = cl2.compile(l2_toCompile.toArray(String[]::new), fileNames1, false);
+				System.out.println("L2 files compiled.");
+				l2_toCompile.clear();
+				l2_fileNames.clear();
+
+				for (int i = 0; i < igbl1.length; i++) {
+					l1_toCompile.add(igbl1[i]);
+					fileNames.add(fileNames1[i]);
+
+					if(ws != null) {
+						File outDir = new File(ws + File.separator + "L1");
+						outDir.mkdirs();
+						for (int x = 0; x < igbl1.length; x++) {
+							IGB_L1 l1 = igbl1[x];
+							String fileName = Utils.getFileNameWithoutExtension(fileNames1[x]);
+							Utils.serialize(l1, outDir.getAbsolutePath() + File.separator + fileName + ".igb_l1");
+							Utils.writeIntoFile(outDir.getAbsolutePath() + File.separator + fileName + ".igb_l1_readable", l1.toString());
+						}
+					}
+				}
+			}
+
+			assert l1_toCompile.size() == fileNames.size();
+
+			if(!l1_toCompile.isEmpty()) {
+				IGB_CL1 cl1 = new IGB_CL1();
+				String[] fileNamesA = fileNames.toArray(String[]::new);
+				int[][][] compiled = cl1.compile(l1_toCompile.toArray(IGB_L1[]::new), fileNamesA, pesSize);
+				System.out.println("L1 compiled.");
+
+				vm.setPES(compiled[0]);
+				if(ws != null) {
+					File outDir = new File(ws + File.separator + "BIN");
+					outDir.mkdirs();
+					String fileName = fileNames.get(0);
+					Utils.serialize(compiled[0], outDir.getAbsolutePath() + File.separator + fileName + ".igb_pes");
+				}
+				System.out.println("Custom PES parsed.");
+				/*
+				 * } else { vm.initPES(pesSize);
+				 * 
+				 * for (int i = 0; i < compiled.length; i++) { vm.parse(compiled[i]);
+				 * System.out.println("Parsed \"" + fileNamesA[i] + "\" into PES.");
+				 * 
+				 * }
+				 * 
+				 * if(ws != null) { File outDir = new File(ws + File.separator + "BIN");
+				 * outDir.mkdirs(); final String t1 = outDir.getAbsolutePath() + File.separator;
+				 * for (int i = 0; i < compiled.length; i++) { String fileName =
+				 * Utils.getFileNameWithoutExtension(fileNamesA[i]);
+				 * Utils.serialize(compiled[i], t1 + fileName + ".igb_bin");
+				 * Utils.writeIntoFile(t1 + fileName + ".igb_bin_readable",
+				 * Utils.arrayToString(compiled[i], " ", "\n")); } } }
+				 */
 			}
 
 		} else
 			throw new IGB_VM_Exception("You must either provie pes file or code paths.");
 
-		igbvm.runRender(fps);
-		igbvm.run(startline);
+		vm.runRender(fps);
+		vm.run(startline);
 	}
 
 	private int[][] p;
@@ -307,7 +354,7 @@ public class IGB_VM {
 			return "null*";
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < p[l].length; i++) {
-			if(p[l][i] == IGB_Compiler_L1.IGNORE_INT)
+			if(p[l][i] == IGB_CL1.IGNORE_INT)
 				break;
 			sb.append(p[l][i]);
 
