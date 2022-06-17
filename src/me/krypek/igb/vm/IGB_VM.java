@@ -94,8 +94,8 @@ public class IGB_VM {
 		} else if(codePaths != null) {
 			List<String> fileNames = new ArrayList<>();
 			List<IGB_L1> l1_toCompile = new ArrayList<>();
-			List<String> l2_toCompile = new ArrayList<>();
-			List<String> l2_fileNames = new ArrayList<>();
+			String l2Path = null;
+
 			for (String path : codePaths) {
 				String ext = Utils.getFileExtension(Utils.getFileName(path));
 				String fileName = Utils.getFileNameWithoutExtension(Utils.getFileName(path));
@@ -111,35 +111,32 @@ public class IGB_VM {
 					fileNames.add(fileName);
 				}
 				case "igb_l2" -> {
-					l2_toCompile.add(Utils.readFromFile(path, "\n"));
-					l2_fileNames.add(fileName);
+					if(l2Path != null)
+						throw new IGB_VM_Exception("You can specify an L2 file once.");
+					l2Path = path;
 				}
 				default -> throw new IGB_VM_Exception("Unsupported file extension: \"." + ext + "\"  File: \"" + path + "\".");
 				}
 			}
 
-			assert l2_toCompile.size() == l2_fileNames.size();
-
-			if(!l2_toCompile.isEmpty()) {
+			if(l2Path != null) {
 				IGB_CL2 cl2 = new IGB_CL2();
-				String[] fileNames1 = l2_fileNames.toArray(String[]::new);
-				IGB_L1[] igbl1 = cl2.compile(l2_toCompile.toArray(String[]::new), fileNames1, false);
-				System.out.println("L2 files compiled.");
-				l2_toCompile.clear();
-				l2_fileNames.clear();
+				IGB_L1[] igbl1 = cl2.compile(l2Path, false);
+				System.out.println("L2 file compiled.");
 
 				for (int i = 0; i < igbl1.length; i++) {
 					l1_toCompile.add(igbl1[i]);
-					fileNames.add(fileNames1[i]);
+					String fileName = Utils.getFileName(igbl1[i].path);
+					fileNames.add(fileName);
 
 					if(ws != null) {
 						File outDir = new File(ws + File.separator + "L1");
 						outDir.mkdirs();
 						for (int x = 0; x < igbl1.length; x++) {
 							IGB_L1 l1 = igbl1[x];
-							String fileName = Utils.getFileNameWithoutExtension(fileNames1[x]);
-							Utils.serialize(l1, outDir.getAbsolutePath() + File.separator + fileName + ".igb_l1");
-							Utils.writeIntoFile(outDir.getAbsolutePath() + File.separator + fileName + ".igb_l1_readable", l1.toString());
+							String fileName1 = Utils.getFileNameWithoutExtension(fileName);
+							Utils.serialize(l1, outDir.getAbsolutePath() + File.separator + fileName1 + ".igb_l1");
+							Utils.writeIntoFile(outDir.getAbsolutePath() + File.separator + fileName1 + ".igb_l1_readable", l1.toString());
 						}
 					}
 				}
@@ -352,7 +349,7 @@ public class IGB_VM {
 	private String getLogString() {
 		if(l < 0 || p[l] == null)
 			return "null*";
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("line " + l + ": ");
 		for (int i = 0; i < p[l].length; i++) {
 			if(p[l][i] == IGB_CL1.IGNORE_INT)
 				break;
@@ -462,8 +459,8 @@ public class IGB_VM {
 	}
 
 	private void log(int val) {
-		if(logToTerm)
-			System.out.println("LOG: " + val / 1000d);
+		// if(logToTerm)
+		System.out.println("LOG: " + val / 1000d);
 
 		if(fileLogPath != null)
 			logWriter.println("LOG: " + val / 1000d);
@@ -477,10 +474,10 @@ public class IGB_VM {
 		case 0 -> {
 			if(switch (p[l][1]) {
 			case 0 -> r[p[l][2]] != (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
-			case 1 -> r[p[l][2]] >  (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
-			case 2 -> r[p[l][2]] <  (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
-			case 3 -> r[p[l][2]] >= (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
-			case 4 -> r[p[l][2]] <= (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
+			case 1 -> r[p[l][2]] >= (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
+			case 2 -> r[p[l][2]] <= (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
+			case 3 -> r[p[l][2]] >  (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
+			case 4 -> r[p[l][2]] <  (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
 			case 5 -> r[p[l][2]] == (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
 			default -> throw new IllegalArgumentException();
 			}) l = p[l][5];
