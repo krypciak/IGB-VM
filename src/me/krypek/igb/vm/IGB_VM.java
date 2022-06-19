@@ -100,22 +100,22 @@ public class IGB_VM {
 				String ext = Utils.getFileExtension(Utils.getFileName(path));
 				String fileName = Utils.getFileNameWithoutExtension(Utils.getFileName(path));
 				switch (ext) {
-				case "igb_bin" -> {
-					int[][] binary = Utils.deserialize(path);
-					vm.parse(binary);
-					System.out.println("Parsed \"" + path + "\" into PES.");
-				}
-				case "igb_l1" -> {
-					IGB_L1 igbl1 = Utils.deserialize(path);
-					l1_toCompile.add(igbl1);
-					fileNames.add(fileName);
-				}
-				case "igb_l2" -> {
-					if(l2Path != null)
-						throw new IGB_VM_Exception("You can specify an L2 file once.");
-					l2Path = path;
-				}
-				default -> throw new IGB_VM_Exception("Unsupported file extension: \"." + ext + "\"  File: \"" + path + "\".");
+					case "igb_bin" -> {
+						int[][] binary = Utils.deserialize(path);
+						vm.parse(binary);
+						System.out.println("Parsed \"" + path + "\" into PES.");
+					}
+					case "igb_l1" -> {
+						IGB_L1 igbl1 = Utils.deserialize(path);
+						l1_toCompile.add(igbl1);
+						fileNames.add(fileName);
+					}
+					case "igb_l2" -> {
+						if(l2Path != null)
+							throw new IGB_VM_Exception("You can specify an L2 file once.");
+						l2Path = path;
+					}
+					default -> throw new IGB_VM_Exception("Unsupported file extension: \"." + ext + "\"  File: \"" + path + "\".");
 				}
 			}
 
@@ -408,7 +408,7 @@ public class IGB_VM {
 				logWriter.println(getLogString());
 
 			inst();
-			if(l++ < 0) {
+			if(l++ < -1) {
 				exit();
 				return;
 			}
@@ -469,7 +469,7 @@ public class IGB_VM {
 
 	//@f:off
 	private void inst() {
-		if(0 > l) return;
+		if(-1 > l) return;
 		switch (p[l][0]) {
 		case 0 -> {
 			if(switch (p[l][1]) {
@@ -483,7 +483,10 @@ public class IGB_VM {
 			}) l = p[l][5];
 		}
 		case 1 -> r[p[l][2]] = p[l][1];
-		case 2 -> r[p[l][2]] = r[p[l][1]];
+		case 2 -> {
+			System.out.println(p[l][2]);
+			r[p[l][2]] = r[p[l][1]];
+		}
 		case 3 -> r[p[l][4]] = r[p[l][1]] + (p[l][2] == 1 ? r[p[l][3]] : p[l][3]);
 		case 4 -> {
 			switch(p[l][1]) {
