@@ -1,6 +1,8 @@
 package me.krypek.igb.vm;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -322,6 +324,11 @@ public class IGB_VM {
 			panel.setSize(scaledWidth, scaledHeight);
 		}
 		img = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+		{
+			Graphics2D g = img.createGraphics();
+			g.setColor(Color.white);
+			g.fillRect(0, 0, scaledWidth, scaledHeight);
+		}
 		icon.setImage(img);
 	}
 
@@ -409,7 +416,8 @@ public class IGB_VM {
 
 			inst();
 			if(l++ < -1) {
-				exit();
+				if(!exited)
+					exit();
 				return;
 			}
 			instructionCount++;
@@ -441,12 +449,11 @@ public class IGB_VM {
 			double totalTimeInMs = totalTimeInNano / 1000000.0D;
 			double totalTimeInSeconds = totalTimeInMs / 1000.0D;
 
-			String msg = "Execution finished, took " + String.format("%,.2f", new Object[] { Double.valueOf(totalTimeInMs) })
-					+ " ms.\nTotal instructions: " + instructionCount + "\nCalculated IPS: " + (instructionCount / totalTimeInSeconds);
+			String msg = "Execution finished, took " + String.format("%,.2f", Double.valueOf(totalTimeInMs)) + " ms.\nTotal instructions: "
+					+ instructionCount + "\nCalculated IPS: " + (instructionCount / totalTimeInSeconds);
 
 			info("IGB VM", msg);
 		}
-
 	}
 
 	private void wait(int ticks) {
@@ -483,10 +490,7 @@ public class IGB_VM {
 			}) l = p[l][5];
 		}
 		case 1 -> r[p[l][2]] = p[l][1];
-		case 2 -> {
-			System.out.println(p[l][2]);
-			r[p[l][2]] = r[p[l][1]];
-		}
+		case 2 -> r[p[l][2]] = r[p[l][1]];
 		case 3 -> r[p[l][4]] = r[p[l][1]] + (p[l][2] == 1 ? r[p[l][3]] : p[l][3]);
 		case 4 -> {
 			switch(p[l][1]) {
@@ -508,14 +512,14 @@ public class IGB_VM {
 												 (p[l][4] == 1 ? r[p[l][5]]/1000 : p[l][5]),
 												 (p[l][6] == 1 ? r[p[l][7]]/1000 : p[l][7]));
 				} else {
-					if(p[l].length==6) {
+					if(p[l][5] != 0) {
 						int cell = p[l][5];
 						int[] obj = getpixelRGB((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
 								 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
 						
-						r[cell]   = obj[0];
-						r[cell+1] = obj[1];
-						r[cell+2] = obj[2];
+						r[cell]   = obj[0]*1000;
+						r[cell+1] = obj[1]*1000;
+						r[cell+2] = obj[2]*1000;
 					} else setpixel((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
 									(p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
 				}
@@ -526,9 +530,10 @@ public class IGB_VM {
 					else 
 						pixelCache = _16ColorMap.get(_16Color.values()[r[p[l][2]]]);
 				} else {
-					if(p[l].length==6) {
+					if(p[l][5] != 0) {
 						r[p[l][5]] = getpixel16c((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
-												 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
+												 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]))
+												 *1000;
 						
 					} else setpixel((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
 									(p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
@@ -549,9 +554,9 @@ public class IGB_VM {
 			case 1 -> r[p[l][5]] = r[p[l][2]] * (p[l][3] == 1 ? r[p[l][4]] : p[l][4])/1000;
 			case 2 -> r[p[l][5]] = (r[p[l][2]]*1000) / (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
 			case 3 -> r[p[l][5]] = r[p[l][2]] % (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
-			case 4 -> r[p[l][4]] = new Random().ints(p[l][2], p[l][3]).findFirst().getAsInt() * 1000;
-			case 5 -> r[p[l][3]] = r[r[p[l][2]]];
-			case 6 -> r[r[p[l][3]]] = r[p[l][2]];
+			case 4 -> r[p[l][4]] = new Random().ints(p[l][2], p[l][3]).findFirst().getAsInt()*1000;
+			case 5 -> r[p[l][3]] = r[r[p[l][2]]/1000];
+			case 6 -> r[r[p[l][3]]/1000] = r[p[l][2]];
 			case 7 -> {
 				final int val = r[p[l][2]];
 				final int valT = val * 1000;
