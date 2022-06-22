@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -131,15 +132,17 @@ public class IGB_VM {
 					String fileName = Utils.getFileName(igbl1[i].path);
 					fileNames.add(fileName);
 
-					if(ws != null) {
-						File outDir = new File(ws + File.separator + "L1");
-						outDir.mkdirs();
-						for (int x = 0; x < igbl1.length; x++) {
-							IGB_L1 l1 = igbl1[x];
-							String fileName1 = Utils.getFileNameWithoutExtension(fileName);
-							Utils.serialize(l1, outDir.getAbsolutePath() + File.separator + fileName1 + ".igb_l1");
-							Utils.writeIntoFile(outDir.getAbsolutePath() + File.separator + fileName1 + ".igb_l1_readable", l1.toString());
-						}
+				}
+				if(ws != null) {
+					File outDir = new File(ws + File.separator + "L1");
+					outDir.mkdirs();
+
+					for (int i = 0; i < igbl1.length; i++) {
+						IGB_L1 l1 = igbl1[i];
+
+						String fileName1 = Utils.getFileNameWithoutExtension(new File(l1.path).getName());
+						Utils.serialize(l1, outDir.getAbsolutePath() + File.separator + fileName1 + ".igb_l1");
+						Utils.writeIntoFile(outDir.getAbsolutePath() + File.separator + fileName1 + ".igb_l1_readable", l1.toString());
 					}
 				}
 			}
@@ -414,7 +417,14 @@ public class IGB_VM {
 			if(fileLogPath != null)
 				logWriter.println(getLogString());
 
-			inst();
+			try {
+				inst();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("DEBUG: \n\tline: " + l + "\n\tinstruction: " + Arrays.toString(p[l]) + "\n" + Arrays.toString(p[l + 1]) + "\n"
+						+ Arrays.toString(p[l + 2]));
+				System.exit(1);
+			}
 			if(l++ < -1) {
 				if(!exited)
 					exit();
@@ -552,7 +562,7 @@ public class IGB_VM {
 			switch(p[l][1]) {
 			case 0 -> r[p[l][5]] = r[p[l][2]] - (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
 			case 1 -> r[p[l][5]] = r[p[l][2]] * (p[l][3] == 1 ? r[p[l][4]] : p[l][4])/1000;
-			case 2 -> r[p[l][5]] = (r[p[l][2]]*1000) / (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
+			case 2 -> r[p[l][5]] = (int) ((r[p[l][2]]*1000d) / (p[l][3] == 1 ? r[p[l][4]] : p[l][4]));
 			case 3 -> r[p[l][5]] = r[p[l][2]] % (p[l][3] == 1 ? r[p[l][4]] : p[l][4]);
 			case 4 -> r[p[l][4]] = new Random().ints(p[l][2], p[l][3]).findFirst().getAsInt()*1000;
 			case 5 -> r[p[l][3]] = r[r[p[l][2]]/1000];
