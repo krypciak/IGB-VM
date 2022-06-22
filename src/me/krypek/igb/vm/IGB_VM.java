@@ -422,7 +422,6 @@ public class IGB_VM {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("DEBUG: \n\tline: " + l + "\n\tinstruction: " + Arrays.toString(p[l]));
-				System.exit(1);
 			}
 			if(l++ < -1) {
 				if(!exited)
