@@ -410,6 +410,8 @@ public class IGB_VM {
 			}
 		}
 
+		startTime = System.nanoTime();
+
 		while (true) {
 			if(logToTerm)
 				System.out.println(getLogString());
@@ -459,20 +461,24 @@ public class IGB_VM {
 			double totalTimeInMs = totalTimeInNano / 1000000.0D;
 			double totalTimeInSeconds = totalTimeInMs / 1000.0D;
 
-			String msg = "Execution finished, took " + String.format("%,.2f", Double.valueOf(totalTimeInMs)) + " ms.\nTotal instructions: "
-					+ instructionCount + "\nCalculated IPS: " + (instructionCount / totalTimeInSeconds);
+			String msg = "Execution finished, took " + String.format("%,.2f", Double.valueOf(totalTimeInSeconds)) + " sec.\nTotal instructions: "
+					+ instructionCount + "\nCalculated IPS: " + String.format("%,.2f", (instructionCount / totalTimeInSeconds));
 
 			info("IGB VM", msg);
 		}
 	}
 
 	private void wait(int ticks) {
+		long nano1 = System.nanoTime();
 		try {
 			Thread.sleep(ticks * 50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			System.exit(-1);
 		}
+		long nano2 = System.nanoTime();
+
+		startTime -= nano1 - nano2;
 	}
 
 	private void log(int val) {
