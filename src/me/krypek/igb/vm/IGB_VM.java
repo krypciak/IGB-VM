@@ -12,14 +12,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
-import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -220,28 +217,6 @@ public class IGB_VM {
 	private boolean screenType, exited = false;
 
 	private int pixelCache;
-
-	//@f:off
-	public final Map<_16Color, Integer> _16ColorMap = Map.ofEntries(
-            new AbstractMap.SimpleEntry<>(_16Color.white,		getRGBValue(249, 255, 255)), 
-            new AbstractMap.SimpleEntry<>(_16Color.yellow, 		getRGBValue(255, 216, 61)), 
-            new AbstractMap.SimpleEntry<>(_16Color.orange, 		getRGBValue(249, 128, 29)), 
-            new AbstractMap.SimpleEntry<>(_16Color.red, 		getRGBValue(176, 46, 38)), 
-            new AbstractMap.SimpleEntry<>(_16Color.magenta, 	getRGBValue(198, 79, 189)), 
-            new AbstractMap.SimpleEntry<>(_16Color.purple, 		getRGBValue(137, 50, 183)), 
-            new AbstractMap.SimpleEntry<>(_16Color.blue, 		getRGBValue(60, 68, 169)), 
-            new AbstractMap.SimpleEntry<>(_16Color.lightBlue, 	getRGBValue(58, 179, 218)), 
-            new AbstractMap.SimpleEntry<>(_16Color.lime, 		getRGBValue(128, 199, 31)), 
-            new AbstractMap.SimpleEntry<>(_16Color.green,		getRGBValue(93, 124, 21)), 
-            new AbstractMap.SimpleEntry<>(_16Color.brown, 		getRGBValue(130, 84, 50)), 
-            new AbstractMap.SimpleEntry<>(_16Color.cyan, 		getRGBValue(22, 156, 157)), 
-            new AbstractMap.SimpleEntry<>(_16Color.lightGray, 	getRGBValue(156, 157, 151)), 
-            new AbstractMap.SimpleEntry<>(_16Color.pink, 		getRGBValue(172, 81, 114)), 
-            new AbstractMap.SimpleEntry<>(_16Color.gray, 		getRGBValue(71, 79, 82)), 
-            new AbstractMap.SimpleEntry<>(_16Color.black, 		getRGBValue(29, 28, 33)) );
-    //@f:on
-
-	public final Map<Integer, _16Color> RGBValueTo16 = _16ColorMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
 
 	public IGB_VM(int width, int height, boolean popup, boolean rescaleFrame, String fileLogPath, boolean logToTerm, int wac, String saveRAM) {
 		JFrame tmpFrame = new JFrame();
@@ -542,11 +517,11 @@ public class IGB_VM {
 			} else {
 				if(p[l][1] == -1) {
 					if(p[l][2] == -1) 
-						pixelCache = _16ColorMap.get(_16Color.values()[p[l][3]]);
+						pixelCache = _16Color.values()[p[l][3]].mcrgb;
 					else 
-						pixelCache = _16ColorMap.get(_16Color.values()[r[p[l][2]]]);
+						pixelCache = _16Color.values()[r[p[l][2]]/1000].mcrgb;
 				} else {
-					if(p[l][5] != 0) {
+					if(p[l][5] != -1) {
 						r[p[l][5]] = getpixel16c((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
 												 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]))
 												 *1000;
@@ -611,9 +586,9 @@ public class IGB_VM {
 		return new int[] { color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF };
 	}
 
-	private int getpixel16c(int x, int y) { return RGBValueTo16.get(img.getRGB(x, y)).ordinal(); }
+	private int getpixel16c(int x, int y) { return _16Color.getFromRGB(img.getRGB(x * screenMulti, y * screenMulti)).ordinal(); }
 
 	private static int getRGBValueFromMCRGBValue(int mcCode) { return getRGBValue(mcCode >> 16 & 0xFF, mcCode >> 8 & 0xFF, mcCode & 0xFF); }
 
-	private static int getRGBValue(int r, int g, int b) { return 0xFF000000 | (r & 0xFF) << 16 | (g & 0xFF) << 8 | b & 0xFF; }
+	public static int getRGBValue(int r, int g, int b) { return 0xFF000000 | (r & 0xFF) << 16 | (g & 0xFF) << 8 | b & 0xFF; }
 }
