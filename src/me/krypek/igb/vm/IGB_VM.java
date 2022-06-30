@@ -503,7 +503,7 @@ public class IGB_VM {
 												 (p[l][4] == 1 ? r[p[l][5]]/1000 : p[l][5]),
 												 (p[l][6] == 1 ? r[p[l][7]]/1000 : p[l][7]));
 				} else {
-					if(p[l][5] != 0) {
+					if(p[l][5] != -1) {
 						int cell = p[l][5];
 						int[] obj = getpixelRGB((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
 								 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
