@@ -1,4 +1,4 @@
-# IGB-VM
+**IGB VM** is an execution enviroment for [**IGB Binary](https://github.com/krypciak/IGB-Compiler-L1).
  
 ### Pixel cache
 
