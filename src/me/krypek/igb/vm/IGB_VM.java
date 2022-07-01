@@ -11,13 +11,17 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -74,7 +78,7 @@ public class IGB_VM {
 		final int fps = data.getIntOrDef("fps", 60);
 		final String ws = data.getStringOrDef("ws", null);
 
-		IGB_VM vm = new IGB_VM(500, 500, popup, rescaleFrame, fileLogPath, logTerminal, wac, saveRAM);
+		IGB_VM vm = new IGB_VM(500, 500, popup, rescaleFrame, fileLogPath, logTerminal, wac, saveRAM, ws);
 
 		if(ramPath == null) {
 			vm.initRAM(ramSize);
@@ -218,7 +222,8 @@ public class IGB_VM {
 
 	private int pixelCache;
 
-	public IGB_VM(int width, int height, boolean popup, boolean rescaleFrame, String fileLogPath, boolean logToTerm, int wac, String saveRAM) {
+	public IGB_VM(int width, int height, boolean popup, boolean rescaleFrame, String fileLogPath, boolean logToTerm, int wac, String saveRAM,
+			String workspace) {
 		JFrame tmpFrame = new JFrame();
 		tmpFrame.setSize(0, 0);
 		tmpFrame.setVisible(true);
@@ -258,6 +263,20 @@ public class IGB_VM {
 					if(!exited)
 						exit();
 					System.exit(0);
+				} else if(e.getKeyCode() == KeyEvent.VK_F2) {
+					if(workspace == null) {
+						error("Workspace folder has not been set.", "Error");
+					} else {
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS");
+						try {
+							File out = new File(new File(workspace).getAbsolutePath() + "/screenshots/" + sdf.format(new Date()) + ".png");
+							ImageIO.write(img, "png", out);
+							System.out.println("Screenshot saved at " + out.getAbsolutePath());
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+
 				}
 				char c = e.getKeyChar();
 				r[IGB_MA.KEYBOARD_INPUT] = c * 1000;
