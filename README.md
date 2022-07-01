@@ -2,8 +2,6 @@
 
 The instruction set is explained [here](https://github.com/krypciak/IGB-Compiler-L1#instruction-explanation).
 
-### Take a screenshot using F2
-
 ### Floating points values
 Floating point values are supported, but they are limited to only 3 digits.  
 This is done by using an integer as if it was shifted by 3 digits to the right:
@@ -33,4 +31,15 @@ To set a pixel, you need to set the pixel cache first.
 It's like picking a color, then drawing.  
 This way is much faster then setting the color every time.  
 
+### Take a screenshot using F2  
 
+<br /><br /><br />
+## Dependencies:
+- [FreeArgParser-Java](https://github.com/krypciak/FreeArgParser-Java)
+- [IGB-Compiler-L1](https://github.com/krypciak/IGB-Compiler-L1)
+- [IGB-Compiler-L2](https://github.com/krypciak/IGB-Compiler-L2)  
+- [Utils](https://github.com/krypciak/Utils)
+
+
+# License
+Licensed under GNU GPLv3 or later
