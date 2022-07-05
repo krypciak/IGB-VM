@@ -38,8 +38,6 @@ import me.krypek.igb.cl1.datatypes.IGB_L1;
 import me.krypek.igb.cl2.IGB_CL2;
 import me.krypek.utils.Utils;
 
-import static me.krypek.igb.cl1.IGB_MA.INVALID_INT;
-
 public class IGB_VM {
 
 	public static void error(String a, String b) { JOptionPane.showMessageDialog(null, b, a, 0); }
@@ -331,13 +329,12 @@ public class IGB_VM {
 	private String getLogString() {
 		if(l < 0 || p[l] == null)
 			return "null*";
-		StringBuilder sb = new StringBuilder("line " + l + ": ");
+		StringBuilder sb = new StringBuilder("line " + l + ":");
 		for (int i = 0; i < p[l].length; i++) {
-			if(p[l][i] == INVALID_INT)
+			if(p[l][i] == IGB_MA.INVALID_INT)
 				break;
-			sb.append(p[l][i]);
-
 			sb.append(" ");
+			sb.append(p[l][i]);
 		}
 		return sb.toString();
 	}
