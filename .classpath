@@ -6,9 +6,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IGB-Compiler-L2"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IGB-Compiler-L1"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Utils"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/freeargparser"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Utils"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IGB-Compiler-L1"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IGB-Compiler-L2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MC-Datapack-Parser"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MCMPC-Optimizer"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
