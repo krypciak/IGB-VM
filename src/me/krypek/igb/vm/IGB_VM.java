@@ -58,9 +58,11 @@ public class IGB_VM {
 				.add("drsf","dontReScaleFrame", false, false, ArgType.None, "If selected, won't auto scale the frame.")
 				.add("wac", "waitAfterInstruction", false, false, ArgType.Int,  "If selected, will wait X nano seconds between each instruction.")
 				.add("fps", "fps", 		false, false, ArgType.Int, 			"Default: 60")
-				.add("ps", "PES_Size",true,   false, ArgType.Int, 			"PES size. Select if pes isn't selected. Default: 10000")
+				.add("ps", "PES_Size",	true,   false, ArgType.Int, 		"PES size. Select if pes isn't selected. Default: 10000")
 				.add("ws", "workspaceFolder", false, false, ArgType.String, "Workspace folder") 
-				.add("q", "quiet", 		false, false, 		ArgType.None,"If selected, compilation won't output anything.")
+				.add("q", "quiet", 		false, false, ArgType.None,			"If selected, compilation won't output anything.")
+				.add("dp", "datapackPath",false, false, ArgType.String, 	"If selected, will parse the datapack to the specified location. Example: ~/.minecraft/saves/MCMulator_v7/datapacks/")
+				.add("qap", "quitAfterParse", false, false, ArgType.None, 	"If selected, will quit after parsing the datapack.")
 				.parse(args);
 		//@f:on
 
@@ -78,6 +80,8 @@ public class IGB_VM {
 		final int fps = data.getIntOrDef("fps", 60);
 		final String ws = data.getStringOrDef("ws", null);
 		final boolean quiet = data.has("q");
+		final String datapackPath = data.getStringOrDef("dp", null);
+		final boolean quitAfterParse = data.has("qap");
 
 		IGB_VM vm = new IGB_VM(500, 500, popup, rescaleFrame, fileLogPath, logTerminal, wac, saveRAM, ws);
 		vm.initPES(pesSize);
@@ -142,6 +146,15 @@ public class IGB_VM {
 
 			IGB_Binary[] bins = cl1.compile(l1s.toArray(IGB_L1[]::new));
 			System.out.println("L1 compiled.");
+
+			if(datapackPath != null) {
+
+				final String name = l2Path == null ? bins[0].name() : Utils.getFileNameWithoutExtension(Utils.getFileName(l2Path));
+
+				MCMPC_Parser.parse(bins, name, datapackPath);
+				if(quitAfterParse)
+					return;
+			}
 
 			vm.parse(bins);
 
@@ -330,12 +343,7 @@ public class IGB_VM {
 		if(l < 0 || p[l] == null)
 			return "null*";
 		StringBuilder sb = new StringBuilder("line " + l + ":");
-		for (int i = 0; i < p[l].length; i++) {
-			if(p[l][i] == IGB_MA.INVALID_INT)
-				break;
-			sb.append(" ");
-			sb.append(p[l][i]);
-		}
+		for (int i = 0; i < p[l].length; i++) { sb.append(" "); sb.append(p[l][i]); }
 		return sb.toString();
 	}
 
@@ -511,7 +519,7 @@ public class IGB_VM {
 					if(p[l][5] != -1) {
 						int cell = p[l][5];
 						int[] obj = getpixelRGB((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
-								 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
+								 				(p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]));
 						
 						r[cell]   = obj[0]*1000;
 						r[cell+1] = obj[1]*1000;
@@ -527,8 +535,8 @@ public class IGB_VM {
 						pixelCache = _16Color.values()[r[p[l][2]]/1000].mcrgb;
 				} else {
 					if(p[l][5] != -1) {
-						r[p[l][5]] = getpixel16c((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
-												 (p[l][3] == 1 ? r[p[l][4]]/1000 : p[l][4]))
+						r[p[l][5]] = getpixel16c((p[l][1] == 1 ? r[p[l][2]] : p[l][2]),
+												 (p[l][3] == 1 ? r[p[l][4]] : p[l][4]))
 												 *1000;
 						
 					} else setpixel((p[l][1] == 1 ? r[p[l][2]]/1000 : p[l][2]),
@@ -557,7 +565,7 @@ public class IGB_VM {
 				final int val = r[p[l][2]];
 				final int valT = val * 1000;
 				int t1 = val;
-				int t2 = 1;
+				int t2 = 1000;
 				while (t1 > t2) {
 					t1 = (t2 + t1) / 2;
 					t2 = valT / t1;
@@ -574,7 +582,6 @@ public class IGB_VM {
 		if(0 > x || x >= width || 0 > y || y >= height) {
 			throw new IGB_VM_Exception("Coordinate out of bounds, x: " + x + ", y: " + y);
 		}
-
 		int x_1 = x * screenMulti;
 		int x_2 = (x + 1) * screenMulti;
 		int y_1 = y * screenMulti;
