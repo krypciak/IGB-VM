@@ -16,7 +16,7 @@ public class MCMPC_Parser {
 
 	public static void parse(IGB_Binary[] bins, String name, String path) {
 
-		final String submodule = "mcmp_" + name;
+		final String submodule = "mcmpc_" + name;
 		StringBuilder sbCallAll = new StringBuilder();
 		sbCallAll.append("tellraw @a [\"\",{\"text\":\"Parsing main \",\"bold\":true,\"color\":\"gold\"},{\"text\":\"" + name
 				+ "\",\"bold\":true,\"color\":\"green\"},{\"text\":\"...\",\"bold\":true,\"color\":\"gold\"}]\n");
