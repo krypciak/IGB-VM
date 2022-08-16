@@ -1,7 +1,7 @@
 $ramcell = 70;
 $ramlimit = 0;
 $startline = 15000;
-$lenlimit = 600;
+$lenlimit = 700;
 
 final var fwidth = 9;
 final var fheight = 9;
@@ -13,10 +13,10 @@ void main() {
 
 	var fail|70| = 0;
 
-	dlog(1111101);
+	dlog(1111901);
 	var a|71| = 4;
 	dlog(a);
-	dlog(1111102);
+	dlog(1111902);
 	if(a == 4) { dlog(1); } else { dlog(0); fail = 1; }
 	if(a >= 4) { dlog(1); } else { dlog(0); fail = 1; }
 	if(a <= 4) { dlog(1); } else { dlog(0); fail = 1; }
@@ -50,7 +50,7 @@ void main() {
 
 	if(fail==1) { dlog(99999); exit(); }
 	
-	dlog(1111103);
+	dlog(1111903);
 	pixelcache(12, 65, 128);
 	setpixel(3, 4);
 	
@@ -67,7 +67,7 @@ void main() {
 	
 	if(fail==1) { dlog(99999); exit(); }
 
-	dlog(1111104);
+	dlog(1111904);
 	var t0|71| = 3;
 	if(t0==3) { dlog(1); } else { dlog(0); fail = 1; }	
 	var t1|72| = t0;
@@ -90,7 +90,7 @@ void main() {
 
 	if(fail==1) { dlog(99999); exit(); }
 	
-	dlog(1111105);
+	dlog(1111905);
 	var[] arr|72| = new var[5];
 	arr[3] = 4;
 	var arr_ele3|75|;
@@ -100,7 +100,7 @@ void main() {
 
 	if(fail==1) { dlog(99999); exit(); }
 
-	dlog(1111106);
+	dlog(1111906);
 
 	t0 = 3;
 	if(arr[t0]==4) { dlog(1); } else { dlog(0); fail = 1; }	
@@ -110,7 +110,7 @@ void main() {
 
 	if(fail==1) { dlog(99999); exit(); }
 
-	dlog(1111107);
+	dlog(1111907);
 	t0 = 3;
 	t1 = 4;
 	var[][] arr1|73| = new var[6][5];
@@ -124,7 +124,7 @@ void main() {
 	if(fail==1) { dlog(99999); exit(); }
 
 
-	dlog(1111108);
+	dlog(1111908);
 	t0 = 255;
 	t1 = 255;
 	t2 = 255;
@@ -168,8 +168,74 @@ void main() {
 
 	if(fail==1) { dlog(99999); exit(); }
 
+	dlog(1111909);
+    
+    var getR|71|;
+    var getG|72|;
+    var getB|73|;
 
-	dlog(1111109);
+    for(var r|74|=0; r<256; r+=16) {
+        for(var g|75|=0; g<256; g+=16) {
+            for(var b|76|=0; b<256; b+=16) {
+                pixelcache(r, g, b);
+                setpixel(0, 0);
+                getpixel(0, 0, getR, getG, getB);
+                if(getR!=r) { fail = 1; }
+                if(getG!=g) { fail = 1; }
+                if(getB!=b) { fail = 1; }
+                if(fail==1) {
+                    dlog(r); 
+                    dlog(g); 
+                    dlog(b); 
+                    dlog(getR); 
+                    dlog(getG); 
+                    dlog(getB); 
+                    break 3;
+                }
+            }
+        }
+        wait(1);
+        dlog(r);
+    }
+
+	if(fail==1) { dlog(99999); exit(); }
+
+	dlog(1111910);
+    
+    for(var i|74| = 0; i < 10; i++) {
+
+        for(var x|78| = 0; x < fwidth; x++) { 
+            for(var y|79| = 0; y < fheight; y++) { 
+                var r|75| = random(0, 255);
+                var g|76| = random(0, 255);
+                var b|77| = random(0, 255);
+                pixelcache(r,g,b);
+                setpixel(x, y);
+                getR = -1;
+                getG = -1;
+                getB = -1;
+                getpixel(x, y, getR, getG, getB);
+                if(getR!=r) { fail = 1; }
+                if(getG!=g) { fail = 1; }
+                if(getB!=b) { fail = 1; }
+                if(fail==1) {
+                    dlog(r); 
+                    dlog(g); 
+                    dlog(b); 
+                    dlog(getR); 
+                    dlog(getG); 
+                    dlog(getB); 
+                    break 4;
+                }
+            }
+      }
+      wait(1);
+      dlog(i);
+    }
+
+	if(fail==1) { dlog(99999); exit(); }
+
+	dlog(1111911);
 	wait(60);
 	dlog(1);
 

@@ -7,10 +7,10 @@ Init 9.0 2.0
 Init 1.0 3.0
 Device ScreenUpdate
 Init 0.0 70.0
-Device Log n 1111101.0
+Device Log n 1111901.0
 Init 4.0 71.0
 Device Log c 71.0
-Device Log n 1111102.0
+Device Log n 1111902.0
 :if_0_start
 If == 71.0 n 4.0 :if_0_end
 Device Log n 1.0
@@ -120,7 +120,7 @@ If == 70.0 n 1.0 :if_8_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_8_end
-Device Log n 1111103.0
+Device Log n 1111903.0
 Pixel Cache Raw 803200.0
 Pixel n 3.0 n 4.0 -1.0
 Init 3.0 74.0
@@ -164,7 +164,7 @@ If == 70.0 n 1.0 :if_12_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_12_end
-Device Log n 1111104.0
+Device Log n 1111904.0
 Init 3.0 71.0
 :if_13_start
 If == 71.0 n 3.0 :if_13_end
@@ -270,7 +270,7 @@ If == 70.0 n 1.0 :if_22_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_22_end
-Device Log n 1111105.0
+Device Log n 1111905.0
 Init 4.0 75.0
 :if_23_start
 If == 75.0 n 4.0 :if_23_end
@@ -298,7 +298,7 @@ If == 70.0 n 1.0 :if_25_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_25_end
-Device Log n 1111106.0
+Device Log n 1111906.0
 Init 3.0 71.0
 :if_26_start
 Add 71.0 n 72.0 17.0
@@ -331,7 +331,7 @@ If == 70.0 n 1.0 :if_28_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_28_end
-Device Log n 1111107.0
+Device Log n 1111907.0
 Init 3.0 71.0
 Init 4.0 72.0
 Math * 71.0 n 5.0 11.0
@@ -370,7 +370,7 @@ If == 70.0 n 1.0 :if_31_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_31_end
-Device Log n 1111108.0
+Device Log n 1111908.0
 Init 255.0 71.0
 Init 255.0 72.0
 Init 255.0 73.0
@@ -498,7 +498,127 @@ If == 70.0 n 1.0 :if_41_end
 Device Log n 99999.0
 Cell Jump -2.0
 :if_41_end
-Device Log n 1111109.0
+Device Log n 1111909.0
+:for_2_start
+Init 0.0 74.0
+If < 74.0 n 256.0 :for_2_end
+:for_2_loop
+:for_3_start
+Init 0.0 75.0
+If < 75.0 n 256.0 :for_3_end
+:for_3_loop
+:for_4_start
+Init 0.0 76.0
+If < 76.0 n 256.0 :for_4_end
+:for_4_loop
+Pixel Cache c 74.0 c 75.0 c 76.0
+Pixel n 0.0 n 0.0 -1.0
+Pixel n 0.0 n 0.0 71.0
+:if_42_start
+If != 71.0 c 74.0 :if_42_end
+Init 1.0 70.0
+:if_42_end
+:if_43_start
+If != 72.0 c 75.0 :if_43_end
+Init 1.0 70.0
+:if_43_end
+:if_44_start
+If != 73.0 c 76.0 :if_44_end
+Init 1.0 70.0
+:if_44_end
+:if_45_start
+If == 70.0 n 1.0 :if_45_end
+Device Log c 74.0
+Device Log c 75.0
+Device Log c 76.0
+Device Log c 71.0
+Device Log c 72.0
+Device Log c 73.0
+Cell Jump :for_3_end
+:if_45_end
+:for_4_check
+Add 76.0 n 16.0 76.0
+If >= 76.0 n 256.0 :for_4_loop
+:for_4_end
+:for_3_check
+Add 75.0 n 16.0 75.0
+If >= 75.0 n 256.0 :for_3_loop
+:for_3_end
+Device CoreWait 1.0
+Device Log c 74.0
+:for_2_check
+Add 74.0 n 16.0 74.0
+If >= 74.0 n 256.0 :for_2_loop
+:for_2_end
+:if_46_start
+If == 70.0 n 1.0 :if_46_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_46_end
+Device Log n 1111910.0
+:for_5_start
+Init 0.0 74.0
+If < 74.0 n 10.0 :for_5_end
+:for_5_loop
+:for_6_start
+Init 0.0 78.0
+If < 78.0 n 9.0 :for_6_end
+:for_6_loop
+:for_7_start
+Init 0.0 79.0
+If < 79.0 n 9.0 :for_7_end
+:for_7_loop
+Math R 0.0 255.0 75.0
+Math R 0.0 255.0 76.0
+Math R 0.0 255.0 77.0
+Pixel Cache c 75.0 c 76.0 c 77.0
+Pixel c 78.0 c 79.0 -1.0
+Init -1.0 71.0
+Init -1.0 72.0
+Init -1.0 73.0
+Pixel c 78.0 c 79.0 71.0
+:if_47_start
+If != 71.0 c 75.0 :if_47_end
+Init 1.0 70.0
+:if_47_end
+:if_48_start
+If != 72.0 c 76.0 :if_48_end
+Init 1.0 70.0
+:if_48_end
+:if_49_start
+If != 73.0 c 77.0 :if_49_end
+Init 1.0 70.0
+:if_49_end
+:if_50_start
+If == 70.0 n 1.0 :if_50_end
+Device Log c 75.0
+Device Log c 76.0
+Device Log c 77.0
+Device Log c 71.0
+Device Log c 72.0
+Device Log c 73.0
+Cell Jump :for_5_end
+:if_50_end
+:for_7_check
+Add 79.0 n 1.0 79.0
+If >= 79.0 n 9.0 :for_7_loop
+:for_7_end
+:for_6_check
+Add 78.0 n 1.0 78.0
+If >= 78.0 n 9.0 :for_6_loop
+:for_6_end
+Device CoreWait 1.0
+Device Log c 74.0
+:for_5_check
+Add 74.0 n 1.0 74.0
+If >= 74.0 n 10.0 :for_5_loop
+:for_5_end
+:if_51_start
+If == 70.0 n 1.0 :if_51_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_51_end
+Device Log n 1111911.0
 Device CoreWait 60.0
 Device Log n 1.0
 :f_main_0_end
