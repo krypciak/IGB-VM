@@ -29,9 +29,9 @@ final var povarsY = blockSpawnY-5;
 
 final var skipAllWait = 0;
 final var ticksToFall = 2;
-final var ticksToNewBlock = 6;
+final var ticksToNewBlock = 10;
 
-final var removeRNG = 1;
+final var removeRNG = 0;
 // set 0 to disable
 var benchmarkTimes = 0; 
 

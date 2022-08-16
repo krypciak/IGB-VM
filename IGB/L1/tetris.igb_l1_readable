@@ -18,6 +18,7 @@ Init 0.0 107.0
 Init -1.0 4.0
 Cell Call :f_tetris_drawBorders_0_start
 :if_0_start
+Cell Jump :if_0_end
 Init 0.0 106.0
 Cell Jump :elseif_0
 :if_0_end
@@ -128,7 +129,7 @@ Copy 83.0 74.0
 Copy 84.0 75.0
 Cell Call :f_tetris_drawBlock_2_start
 :if_15_start
-Device CoreWait 6.0
+Device CoreWait 10.0
 :elseif_4
 :if_15_end
 :f_tetris_collision_0_end
@@ -508,6 +509,7 @@ Cell Return
 :f_tetris_newBlock_0_start
 Copy 106.0 85.0
 :if_30_start
+Cell Jump :if_30_end
 Add 106.0 n 1.0 106.0
 :if_31_start
 If > 106.0 n 6.0 :if_31_end
