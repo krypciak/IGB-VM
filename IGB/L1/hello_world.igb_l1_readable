@@ -2,8 +2,8 @@ Startline 15000
 Cell Call :f_main_0_start
 Cell Jump -2.0
 :f_main_0_start
-Init 100.0 1.0
-Init 30.0 2.0
+Init 72.0 1.0
+Init 21.0 2.0
 Init 1.0 3.0
 Device ScreenUpdate
 Init 3.0 57.0

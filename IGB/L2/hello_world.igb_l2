@@ -4,8 +4,8 @@ $startLine = 15000;
 $import <charlib>;
 
 void main() {
-  width = 100;
-  height = 30;
+  width = 72;
+  height = 21;
   stype = rgb;
   
   drawstring(3, 0, "Hello world!", "big", 0);
