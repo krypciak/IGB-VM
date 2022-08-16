@@ -31,7 +31,7 @@ final var skipAllWait = 0;
 final var ticksToFall = 2;
 final var ticksToNewBlock = 6;
 
-final var removeRNG = 0;
+final var removeRNG = 1;
 // set 0 to disable
 var benchmarkTimes = 0; 
 
@@ -83,7 +83,7 @@ void tetris_play() {
 	tetris_newBlock();
 	tetris_drawBlock(blockX, blockY);
 	tetris_drawPovars();
-	
+   
 	while(true) {
 		tetris_down();
 		
@@ -294,7 +294,7 @@ void tetris_drawNextBlock() {
 
 void tetris_newBlock() {
 	blockType = nextBlock;
-    if(skipAllWait==1) {
+    if(removeRNG==1) {
         nextBlock++;
         if(nextBlock > 6) { nextBlock = 0; }
     } else { 
@@ -783,7 +783,7 @@ void tetris_rotate_left() {
 	
 	var t0;
 	var t1;
-	
+
 	if(block[0][0]==1) { if(block[0][3]==0) {getpixel(blockX, y3, getR, getG, getB); if(getR!=255) {return;}}}
 	if(block[1][0]==1) { if(block[0][2]==0) {getpixel(blockX, y2, getR, getG, getB); if(getR!=255) {return;}}}
 	if(block[2][0]==1) { if(block[0][1]==0) {getpixel(blockX, y1, getR, getG, getB); if(getR!=255) {return;}}}
@@ -806,6 +806,7 @@ void tetris_rotate_left() {
 
 	pixelcache(backgroundR, backgroundG, backgroundB);
 	
+
 	if(block[0][0]==1) { setpixel(blockX, blockY); }
 	if(block[1][0]==1) { setpixel(x1, blockY); }
 	if(block[2][0]==1) { setpixel(x2, blockY); }
