@@ -255,9 +255,13 @@ public class IGB_VM {
 					} else {
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS");
 						try {
-							File out = new File(new File(workspace).getAbsolutePath() + "/screenshots/" + sdf.format(new Date()) + ".png");
+							File screenshotDir = new File(new File(workspace).getAbsolutePath() + "/screenshots/");
+							screenshotDir.mkdirs();
+							File out = new File(screenshotDir.getAbsolutePath() + '/' + sdf.format(new Date()) + ".png");
+
 							ImageIO.write(img, "png", out);
 							System.out.println("Screenshot saved at " + out.getAbsolutePath());
+
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
