@@ -1,0 +1,58 @@
+Startline 15000
+Cell Call :f_main_0_start
+Cell Jump -2.0
+:f_main_0_start
+Init 100.0 1.0
+Init 30.0 2.0
+Init 1.0 3.0
+Device ScreenUpdate
+Init 3.0 57.0
+Init 0.0 58.0
+Init 72.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 101.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 108.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 108.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 111.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 32.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 119.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 111.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 114.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 108.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 100.0 56.0
+Cell Call :f_bigdrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 33.0 56.0
+Cell Call :f_bigdrawchar_3_start
+:f_main_0_end
+Cell Return
