@@ -8,8 +8,9 @@ This is done by using an integer as if it was shifted by 3 digits to the right:
 - `1.234` is really `1234`
 - `0.001` is really `1`  
 
-Since the number is shifted by 3 digits to the right, the maxium value is 2147483.647, not 2147483647.  
+Since the number is shifted by 3 digits to the right, the maxium value is 2147483 **.** 647, not 2147483647.  
 <br/>
+
 There's how the operations are handled with such system:
 - `+` works normally; `3.3 + 1.2 == 4.5` `3300 + 1200 == 4500`
 - `-` works normally; `3.3 - 1.2 == 2.1` `3300 - 1200 == 2100`
