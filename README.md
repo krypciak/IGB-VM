@@ -5,8 +5,8 @@ The instruction set is explained [here](https://github.com/krypciak/IGB-Compiler
 ### Floating points values
 Floating point values are supported, but they are limited to only 3 digits.  
 This is done by using an integer as if it was shifted by 3 digits to the right:
-- `1.234` is really `1234`
-- `0.001` is really `1`  
+- `1.234` is stored as `1234`
+- `0.001` is stored as `1`  
 
 Since the number is shifted by 3 digits to the right, the maxium value is 2147483 **.** 647, not 2147483647.  
 <br/>
