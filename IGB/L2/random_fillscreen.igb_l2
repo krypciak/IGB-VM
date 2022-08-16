@@ -1,0 +1,20 @@
+$ramcell = 70;
+$ramlimit = 20;
+$startLine  = 15000;
+$lenlimit = 100;
+
+final var fwidth = 100;
+final var fheight = 100;
+
+void main() {
+	width = fwidth;
+	height = fheight;
+	stype = rgb;
+   
+	for(var y=0; y<fheight; y++) {
+		for(var x=0; x<fwidth; x++) {
+			pixelcache(random(0,255), random(0,255), random(0,255));
+			setpixel(x, y);
+		}
+	}
+}

@@ -1,0 +1,176 @@
+$ramcell = 70;
+$ramlimit = 0;
+$startline = 15000;
+$lenlimit = 600;
+
+final var fwidth = 9;
+final var fheight = 9;
+
+void main() {
+	width = fwidth;
+	height = fheight;
+	stype = rgb;
+
+	var fail|70| = 0;
+
+	dlog(1111101);
+	var a|71| = 4;
+	dlog(a);
+	dlog(1111102);
+	if(a == 4) { dlog(1); } else { dlog(0); fail = 1; }
+	if(a >= 4) { dlog(1); } else { dlog(0); fail = 1; }
+	if(a <= 4) { dlog(1); } else { dlog(0); fail = 1; }
+	if(a < 4) { dlog(0); fail = 1; } else { dlog(1); }
+	if(a > 4) { dlog(0); fail = 1; } else { dlog(1); }
+	if(a != 4) { dlog(0); fail = 1; } else { dlog(1); }
+	if(a == 5) { dlog(0); fail = 1; } else { dlog(1); }
+
+	if(fail==1) { dlog(99999); exit(); }
+	
+	pixelcache(rgb_black);
+	for(var x|71|=0; x<fwidth; x++) {
+		setpixel(x, x);
+	}
+
+	pixelcache(rgb_yellow);
+	for(var x|70|=2; x<6; x++) {
+		setpixel(x, 2);
+		setpixel(x, 6);
+		setpixel(2, x);
+		setpixel(6, x);
+	}
+	pixelcache(255, 0, 0);
+	setpixel(3, 3);
+
+	pixelcache(0, 255, 0);
+	setpixel(4, 3);
+
+	pixelcache(0, 0, 255);
+	setpixel(5, 3);
+
+	if(fail==1) { dlog(99999); exit(); }
+	
+	dlog(1111103);
+	pixelcache(12, 65, 128);
+	setpixel(3, 4);
+	
+	var R|80|;
+	var G|81|;
+	var B|82|;
+	var x|74| = 3;
+	var y|75| = 4;
+	getpixel(x, y, R, G, B);
+	
+	if(R==12){ dlog(1); } else { dlog(0); dlog(R); fail = 1; }
+	if(G==65){ dlog(1); } else { dlog(0); dlog(G); fail = 1; }
+	if(B==128){ dlog(1); } else { dlog(0); dlog(B); fail = 1; }
+	
+	if(fail==1) { dlog(99999); exit(); }
+
+	dlog(1111104);
+	var t0|71| = 3;
+	if(t0==3) { dlog(1); } else { dlog(0); fail = 1; }	
+	var t1|72| = t0;
+	if(t1==3) { dlog(1); } else { dlog(0); fail = 1; }	
+	var t2|73| = t0+t1;
+	if(t2==6) { dlog(1); } else { dlog(0); fail = 1; }	
+	var t3|74| = t0 - 4;
+	if(t3==-1) { dlog(1); } else { dlog(0); fail = 1; }	
+	t3 = t0 * 4;
+	if(t3==12) { dlog(1); } else { dlog(0); fail = 1; }	
+	t3 = t0 / 1.5;
+	if(t3==2) { dlog(1); } else { dlog(0); fail = 1; }	
+	t3 = t0 % 3213;
+	if(t3==3) { dlog(1); } else { dlog(0); fail = 1; }	
+	t3 = t0 % 2;
+	if(t3==1) { dlog(1); } else { dlog(0); fail = 1; }	
+
+	t3 = sqrt(t0);
+	if(t3==1.732) { dlog(1); } else { dlog(0); dlog(t3); fail = 1; }	
+
+	if(fail==1) { dlog(99999); exit(); }
+	
+	dlog(1111105);
+	var[] arr|72| = new var[5];
+	arr[3] = 4;
+	var arr_ele3|75|;
+	if(arr_ele3==4) { dlog(1); } else { dlog(0); fail = 1; }	
+
+	if(arr[3]==4) { dlog(1); } else { dlog(0); fail = 1; }	
+
+	if(fail==1) { dlog(99999); exit(); }
+
+	dlog(1111106);
+
+	t0 = 3;
+	if(arr[t0]==4) { dlog(1); } else { dlog(0); fail = 1; }	
+	
+	arr[t0] = 5;	
+	if(arr[3]==5) { dlog(1); } else { dlog(0); fail = 1; }	
+
+	if(fail==1) { dlog(99999); exit(); }
+
+	dlog(1111107);
+	t0 = 3;
+	t1 = 4;
+	var[][] arr1|73| = new var[6][5];
+
+	arr1[t0][t1] = 6;
+	if(arr1[3][4]==6) { dlog(1); } else { dlog(0); fail = 1; }	
+
+	arr1[3][4] = 6;
+	if(arr1[t0][t1]==6) { dlog(1); } else { dlog(0); fail = 1; }	
+
+	if(fail==1) { dlog(99999); exit(); }
+
+
+	dlog(1111108);
+	t0 = 255;
+	t1 = 255;
+	t2 = 255;
+	pixelcache(t0, t1, t2);
+	setpixel(4, 5);
+
+
+	t0 = 255;
+	t1 = 0;
+	t2 = 0;
+	pixelcache(t0, t1, t2);
+	setpixel(3, 5);
+	getpixel(3, 5, R, G, B);
+	
+	if(R==t0){ dlog(1); } else { dlog(0); dlog(R); fail = 1; }
+	if(G==t1){ dlog(1); } else { dlog(0); dlog(G); fail = 1; }
+	if(B==t2){ dlog(1); } else { dlog(0); dlog(B); fail = 1; }
+	
+	t0 = 0;
+	t1 = 255;
+	t2 = 0;
+	pixelcache(t0, t1, t2);
+	setpixel(4, 5);
+	getpixel(4, 5, R, G, B);
+	
+	if(R==t0){ dlog(1); } else { dlog(0); dlog(R); fail = 1; }
+	if(G==t1){ dlog(1); } else { dlog(0); dlog(G); fail = 1; }
+	if(B==t2){ dlog(1); } else { dlog(0); dlog(B); fail = 1; }
+	
+	t0 = 0;
+	t1 = 0;
+	t2 = 255;
+	pixelcache(t0, t1, t2);
+	setpixel(5, 5);
+	getpixel(5, 5, R, G, B);
+	
+	if(R==t0){ dlog(1); } else { dlog(0); dlog(R); fail = 1; }
+	if(G==t1){ dlog(1); } else { dlog(0); dlog(G); fail = 1; }
+	if(B==t2){ dlog(1); } else { dlog(0); dlog(B); fail = 1; }
+
+
+	if(fail==1) { dlog(99999); exit(); }
+
+
+	dlog(1111109);
+	wait(60);
+	dlog(1);
+
+}

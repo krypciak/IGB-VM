@@ -1,0 +1,31 @@
+Startline 15000
+Cell Call :f_main_0_start
+Cell Jump -2.0
+:f_main_0_start
+Init 100.0 1.0
+Init 100.0 2.0
+Init 1.0 3.0
+Device ScreenUpdate
+:for_0_start
+Init 0.0 70.0
+If < 70.0 n 100.0 :for_0_end
+:for_0_loop
+:for_1_start
+Init 0.0 71.0
+If < 71.0 n 100.0 :for_1_end
+:for_1_loop
+Math R 0.0 255.0 11.0
+Math R 0.0 255.0 12.0
+Math R 0.0 255.0 13.0
+Pixel Cache c 11.0 c 12.0 c 13.0
+Pixel c 71.0 c 70.0 -1.0
+:for_1_check
+Add 71.0 n 1.0 71.0
+If >= 71.0 n 100.0 :for_1_loop
+:for_1_end
+:for_0_check
+Add 70.0 n 1.0 70.0
+If >= 70.0 n 100.0 :for_0_loop
+:for_0_end
+:f_main_0_end
+Cell Return

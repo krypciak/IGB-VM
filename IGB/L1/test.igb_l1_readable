@@ -1,0 +1,505 @@
+Startline 15000
+Cell Call :f_main_0_start
+Cell Jump -2.0
+:f_main_0_start
+Init 9.0 1.0
+Init 9.0 2.0
+Init 1.0 3.0
+Device ScreenUpdate
+Init 0.0 70.0
+Device Log n 1111101.0
+Init 4.0 71.0
+Device Log c 71.0
+Device Log n 1111102.0
+:if_0_start
+If == 71.0 n 4.0 :if_0_end
+Device Log n 1.0
+Cell Jump :elseif_0
+:if_0_end
+:bracket_0_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_0
+:bracket_0_end
+:if_1_start
+If >= 71.0 n 4.0 :if_1_end
+Device Log n 1.0
+Cell Jump :elseif_1
+:if_1_end
+:bracket_1_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_1
+:bracket_1_end
+:if_2_start
+If <= 71.0 n 4.0 :if_2_end
+Device Log n 1.0
+Cell Jump :elseif_2
+:if_2_end
+:bracket_2_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_2
+:bracket_2_end
+:if_3_start
+If < 71.0 n 4.0 :if_3_end
+Device Log n 0.0
+Init 1.0 70.0
+Cell Jump :elseif_3
+:if_3_end
+:bracket_3_start
+Device Log n 1.0
+:elseif_3
+:bracket_3_end
+:if_4_start
+If > 71.0 n 4.0 :if_4_end
+Device Log n 0.0
+Init 1.0 70.0
+Cell Jump :elseif_4
+:if_4_end
+:bracket_4_start
+Device Log n 1.0
+:elseif_4
+:bracket_4_end
+:if_5_start
+If != 71.0 n 4.0 :if_5_end
+Device Log n 0.0
+Init 1.0 70.0
+Cell Jump :elseif_5
+:if_5_end
+:bracket_5_start
+Device Log n 1.0
+:elseif_5
+:bracket_5_end
+:if_6_start
+If == 71.0 n 5.0 :if_6_end
+Device Log n 0.0
+Init 1.0 70.0
+Cell Jump :elseif_6
+:if_6_end
+:bracket_6_start
+Device Log n 1.0
+:elseif_6
+:bracket_6_end
+:if_7_start
+If == 70.0 n 1.0 :if_7_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_7_end
+Pixel Cache Raw 1907745.0
+:for_0_start
+Init 0.0 71.0
+If < 71.0 n 9.0 :for_0_end
+:for_0_loop
+Pixel c 71.0 c 71.0 -1.0
+:for_0_check
+Add 71.0 n 1.0 71.0
+If >= 71.0 n 9.0 :for_0_loop
+:for_0_end
+Pixel Cache Raw 1.6767037E7
+:for_1_start
+Init 2.0 70.0
+If < 70.0 n 6.0 :for_1_end
+:for_1_loop
+Pixel c 70.0 n 2.0 -1.0
+Pixel c 70.0 n 6.0 -1.0
+Pixel n 2.0 c 70.0 -1.0
+Pixel n 6.0 c 70.0 -1.0
+:for_1_check
+Add 70.0 n 1.0 70.0
+If >= 70.0 n 6.0 :for_1_loop
+:for_1_end
+Pixel Cache Raw 1.671168E7
+Pixel n 3.0 n 3.0 -1.0
+Pixel Cache Raw 65280.0
+Pixel n 4.0 n 3.0 -1.0
+Pixel Cache Raw 255.0
+Pixel n 5.0 n 3.0 -1.0
+:if_8_start
+If == 70.0 n 1.0 :if_8_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_8_end
+Device Log n 1111103.0
+Pixel Cache Raw 803200.0
+Pixel n 3.0 n 4.0 -1.0
+Init 3.0 74.0
+Init 4.0 75.0
+Pixel c 74.0 c 75.0 80.0
+:if_9_start
+If == 80.0 n 12.0 :if_9_end
+Device Log n 1.0
+Cell Jump :elseif_7
+:if_9_end
+:bracket_7_start
+Device Log n 0.0
+Device Log c 80.0
+Init 1.0 70.0
+:elseif_7
+:bracket_7_end
+:if_10_start
+If == 81.0 n 65.0 :if_10_end
+Device Log n 1.0
+Cell Jump :elseif_8
+:if_10_end
+:bracket_8_start
+Device Log n 0.0
+Device Log c 81.0
+Init 1.0 70.0
+:elseif_8
+:bracket_8_end
+:if_11_start
+If == 82.0 n 128.0 :if_11_end
+Device Log n 1.0
+Cell Jump :elseif_9
+:if_11_end
+:bracket_9_start
+Device Log n 0.0
+Device Log c 82.0
+Init 1.0 70.0
+:elseif_9
+:bracket_9_end
+:if_12_start
+If == 70.0 n 1.0 :if_12_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_12_end
+Device Log n 1111104.0
+Init 3.0 71.0
+:if_13_start
+If == 71.0 n 3.0 :if_13_end
+Device Log n 1.0
+Cell Jump :elseif_10
+:if_13_end
+:bracket_10_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_10
+:bracket_10_end
+Copy 71.0 72.0
+:if_14_start
+If == 72.0 n 3.0 :if_14_end
+Device Log n 1.0
+Cell Jump :elseif_11
+:if_14_end
+:bracket_11_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_11
+:bracket_11_end
+Add 71.0 c 72.0 73.0
+:if_15_start
+If == 73.0 n 6.0 :if_15_end
+Device Log n 1.0
+Cell Jump :elseif_12
+:if_15_end
+:bracket_12_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_12
+:bracket_12_end
+Math - 71.0 n 4.0 74.0
+:if_16_start
+If == 74.0 n -1.0 :if_16_end
+Device Log n 1.0
+Cell Jump :elseif_13
+:if_16_end
+:bracket_13_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_13
+:bracket_13_end
+Math * 71.0 n 4.0 74.0
+:if_17_start
+If == 74.0 n 12.0 :if_17_end
+Device Log n 1.0
+Cell Jump :elseif_14
+:if_17_end
+:bracket_14_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_14
+:bracket_14_end
+Math / 71.0 n 1.5 74.0
+:if_18_start
+If == 74.0 n 2.0 :if_18_end
+Device Log n 1.0
+Cell Jump :elseif_15
+:if_18_end
+:bracket_15_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_15
+:bracket_15_end
+Math % 71.0 n 3213.0 74.0
+:if_19_start
+If == 74.0 n 3.0 :if_19_end
+Device Log n 1.0
+Cell Jump :elseif_16
+:if_19_end
+:bracket_16_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_16
+:bracket_16_end
+Math % 71.0 n 2.0 74.0
+:if_20_start
+If == 74.0 n 1.0 :if_20_end
+Device Log n 1.0
+Cell Jump :elseif_17
+:if_20_end
+:bracket_17_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_17
+:bracket_17_end
+Math sqrt 71.0 74.0
+:if_21_start
+If == 74.0 n 1.732 :if_21_end
+Device Log n 1.0
+Cell Jump :elseif_18
+:if_21_end
+:bracket_18_start
+Device Log n 0.0
+Device Log c 74.0
+Init 1.0 70.0
+:elseif_18
+:bracket_18_end
+:if_22_start
+If == 70.0 n 1.0 :if_22_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_22_end
+Device Log n 1111105.0
+Init 4.0 75.0
+:if_23_start
+If == 75.0 n 4.0 :if_23_end
+Device Log n 1.0
+Cell Jump :elseif_19
+:if_23_end
+:bracket_19_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_19
+:bracket_19_end
+:if_24_start
+Copy 75.0 17.0
+If == 17.0 n 4.0 :if_24_end
+Device Log n 1.0
+Cell Jump :elseif_20
+:if_24_end
+:bracket_20_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_20
+:bracket_20_end
+:if_25_start
+If == 70.0 n 1.0 :if_25_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_25_end
+Device Log n 1111106.0
+Init 3.0 71.0
+:if_26_start
+Add 71.0 n 72.0 17.0
+Math CC 17.0 17.0
+If == 17.0 n 4.0 :if_26_end
+Device Log n 1.0
+Cell Jump :elseif_21
+:if_26_end
+:bracket_21_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_21
+:bracket_21_end
+Add 71.0 n 72.0 11.0
+Init 5.0 13.0
+Math CW 13.0 11.0
+:if_27_start
+Copy 75.0 17.0
+If == 17.0 n 5.0 :if_27_end
+Device Log n 1.0
+Cell Jump :elseif_22
+:if_27_end
+:bracket_22_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_22
+:bracket_22_end
+:if_28_start
+If == 70.0 n 1.0 :if_28_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_28_end
+Device Log n 1111107.0
+Init 3.0 71.0
+Init 4.0 72.0
+Math * 71.0 n 5.0 11.0
+Add 11.0 c 72.0 11.0
+Add 11.0 n 73.0 11.0
+Init 6.0 13.0
+Math CW 13.0 11.0
+:if_29_start
+Copy 92.0 17.0
+If == 17.0 n 6.0 :if_29_end
+Device Log n 1.0
+Cell Jump :elseif_23
+:if_29_end
+:bracket_23_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_23
+:bracket_23_end
+Init 6.0 92.0
+:if_30_start
+Math * 71.0 n 5.0 17.0
+Add 17.0 c 72.0 17.0
+Add 17.0 n 73.0 17.0
+Math CC 17.0 17.0
+If == 17.0 n 6.0 :if_30_end
+Device Log n 1.0
+Cell Jump :elseif_24
+:if_30_end
+:bracket_24_start
+Device Log n 0.0
+Init 1.0 70.0
+:elseif_24
+:bracket_24_end
+:if_31_start
+If == 70.0 n 1.0 :if_31_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_31_end
+Device Log n 1111108.0
+Init 255.0 71.0
+Init 255.0 72.0
+Init 255.0 73.0
+Pixel Cache c 71.0 c 72.0 c 73.0
+Pixel n 4.0 n 5.0 -1.0
+Init 255.0 71.0
+Init 0.0 72.0
+Init 0.0 73.0
+Pixel Cache c 71.0 c 72.0 c 73.0
+Pixel n 3.0 n 5.0 -1.0
+Pixel n 3.0 n 5.0 80.0
+:if_32_start
+If == 80.0 c 71.0 :if_32_end
+Device Log n 1.0
+Cell Jump :elseif_25
+:if_32_end
+:bracket_25_start
+Device Log n 0.0
+Device Log c 80.0
+Init 1.0 70.0
+:elseif_25
+:bracket_25_end
+:if_33_start
+If == 81.0 c 72.0 :if_33_end
+Device Log n 1.0
+Cell Jump :elseif_26
+:if_33_end
+:bracket_26_start
+Device Log n 0.0
+Device Log c 81.0
+Init 1.0 70.0
+:elseif_26
+:bracket_26_end
+:if_34_start
+If == 82.0 c 73.0 :if_34_end
+Device Log n 1.0
+Cell Jump :elseif_27
+:if_34_end
+:bracket_27_start
+Device Log n 0.0
+Device Log c 82.0
+Init 1.0 70.0
+:elseif_27
+:bracket_27_end
+Init 0.0 71.0
+Init 255.0 72.0
+Init 0.0 73.0
+Pixel Cache c 71.0 c 72.0 c 73.0
+Pixel n 4.0 n 5.0 -1.0
+Pixel n 4.0 n 5.0 80.0
+:if_35_start
+If == 80.0 c 71.0 :if_35_end
+Device Log n 1.0
+Cell Jump :elseif_28
+:if_35_end
+:bracket_28_start
+Device Log n 0.0
+Device Log c 80.0
+Init 1.0 70.0
+:elseif_28
+:bracket_28_end
+:if_36_start
+If == 81.0 c 72.0 :if_36_end
+Device Log n 1.0
+Cell Jump :elseif_29
+:if_36_end
+:bracket_29_start
+Device Log n 0.0
+Device Log c 81.0
+Init 1.0 70.0
+:elseif_29
+:bracket_29_end
+:if_37_start
+If == 82.0 c 73.0 :if_37_end
+Device Log n 1.0
+Cell Jump :elseif_30
+:if_37_end
+:bracket_30_start
+Device Log n 0.0
+Device Log c 82.0
+Init 1.0 70.0
+:elseif_30
+:bracket_30_end
+Init 0.0 71.0
+Init 0.0 72.0
+Init 255.0 73.0
+Pixel Cache c 71.0 c 72.0 c 73.0
+Pixel n 5.0 n 5.0 -1.0
+Pixel n 5.0 n 5.0 80.0
+:if_38_start
+If == 80.0 c 71.0 :if_38_end
+Device Log n 1.0
+Cell Jump :elseif_31
+:if_38_end
+:bracket_31_start
+Device Log n 0.0
+Device Log c 80.0
+Init 1.0 70.0
+:elseif_31
+:bracket_31_end
+:if_39_start
+If == 81.0 c 72.0 :if_39_end
+Device Log n 1.0
+Cell Jump :elseif_32
+:if_39_end
+:bracket_32_start
+Device Log n 0.0
+Device Log c 81.0
+Init 1.0 70.0
+:elseif_32
+:bracket_32_end
+:if_40_start
+If == 82.0 c 73.0 :if_40_end
+Device Log n 1.0
+Cell Jump :elseif_33
+:if_40_end
+:bracket_33_start
+Device Log n 0.0
+Device Log c 82.0
+Init 1.0 70.0
+:elseif_33
+:bracket_33_end
+:if_41_start
+If == 70.0 n 1.0 :if_41_end
+Device Log n 99999.0
+Cell Jump -2.0
+:if_41_end
+Device Log n 1111109.0
+Device CoreWait 60.0
+Device Log n 1.0
+:f_main_0_end
+Cell Return

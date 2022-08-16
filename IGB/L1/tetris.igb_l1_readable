@@ -1,0 +1,2572 @@
+Startline 15000
+Init 0.0 76.0
+Cell Call :f_main_0_start
+Cell Jump -2.0
+:f_main_0_start
+Cell Call :f_tetris_play_0_start
+:f_main_0_end
+Cell Return
+:f_tetris_play_0_start
+Init 72.0 1.0
+Init 36.0 2.0
+Init 1.0 3.0
+Device ScreenUpdate
+Init 1.0 105.0
+Init 0.0 102.0
+Init 0.0 103.0
+Init 0.0 107.0
+Init -1.0 4.0
+Cell Call :f_tetris_drawBorders_0_start
+:if_0_start
+Cell Jump :if_0_end
+Init 0.0 106.0
+Cell Jump :elseif_0
+:if_0_end
+:bracket_0_start
+Math R 0.0 6.0 106.0
+:elseif_0
+:bracket_0_end
+Cell Call :f_tetris_newBlock_0_start
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+Cell Call :f_tetris_drawPovars_0_start
+:while_0_start
+:while_0_loop
+Cell Call :f_tetris_down_0_start
+:if_1_start
+If == 102.0 n 1.0 :if_1_end
+Add 84.0 n -1.0 84.0
+Cell Call :f_tetris_collision_0_start
+Cell Jump :while_0_start
+:if_1_end
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+Cell Call :f_tetris_keyboardEvent_0_start
+:if_2_start
+If == 103.0 n 1.0 :if_2_end
+Init 0.0 103.0
+Cell Jump :while_0_start
+:if_2_end
+Init 0.0 104.0
+:if_3_start
+:if_4_start
+If == 105.0 n 1.0 :if_4_end
+Device CoreWait 2.0
+Cell Call :f_tetris_keyboardEvent_0_start
+Device CoreWait 2.0
+Cell Call :f_tetris_keyboardEvent_0_start
+:if_4_end
+:if_3_end
+:while_0_check
+Cell Jump :while_0_start
+:while_0_end
+:f_tetris_play_0_end
+Cell Return
+:f_tetris_keyboardEvent_0_start
+:if_5_start
+If != 4.0 n -1.0 :if_5_end
+:if_6_start
+If == 4.0 n 108.0 :if_6_end
+Cell Call :f_tetris_lose_0_start
+Cell Jump :elseif_1
+:if_6_end
+:if_7_start
+If == 4.0 n 115.0 :if_7_end
+Init 1.0 103.0
+Cell Jump :elseif_1
+:if_7_end
+:if_8_start
+If == 4.0 n 97.0 :if_8_end
+Cell Call :f_tetris_left_0_start
+Cell Jump :elseif_1
+:if_8_end
+:if_9_start
+If == 4.0 n 100.0 :if_9_end
+Cell Call :f_tetris_right_0_start
+Cell Jump :elseif_1
+:if_9_end
+:if_10_start
+If == 4.0 n 101.0 :if_10_end
+Cell Call :f_tetris_rotate_right_0_start
+Cell Jump :elseif_1
+:if_10_end
+:if_11_start
+If == 4.0 n 113.0 :if_11_end
+Cell Call :f_tetris_rotate_left_0_start
+Cell Jump :elseif_1
+:if_11_end
+:if_12_start
+If == 4.0 n 119.0 :if_12_end
+Init 0.0 105.0
+:elseif_1
+:if_12_end
+Init -1.0 4.0
+:if_5_end
+:f_tetris_keyboardEvent_0_end
+Cell Return
+:f_tetris_collision_0_start
+:if_13_start
+If == 104.0 n 1.0 :if_13_end
+Cell Call :f_tetris_lose_0_start
+:elseif_2
+:if_13_end
+Cell Call :f_tetris_checkRows_0_start
+Copy 0.0 108.0
+:if_14_start
+If != 108.0 n 0.0 :if_14_end
+Copy 108.0 70.0
+Cell Call :f_addPoints_1_start
+Cell Call :f_tetris_drawPovars_0_start
+:elseif_3
+:if_14_end
+Init 1.0 105.0
+Init 1.0 104.0
+Init 0.0 102.0
+Cell Call :f_tetris_newBlock_0_start
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+:if_15_start
+Device CoreWait 6.0
+:elseif_4
+:if_15_end
+:f_tetris_collision_0_end
+Cell Return
+:f_addPoints_1_start
+:if_16_start
+If == 70.0 n 1.0 :if_16_end
+Add 107.0 n 40.0 107.0
+Cell Jump :elseif_5
+:if_16_end
+:if_17_start
+If == 70.0 n 2.0 :if_17_end
+Add 107.0 n 100.0 107.0
+Cell Jump :elseif_5
+:if_17_end
+:if_18_start
+If == 70.0 n 3.0 :if_18_end
+Add 107.0 n 300.0 107.0
+Cell Jump :elseif_5
+:if_18_end
+:if_19_start
+If == 70.0 n 4.0 :if_19_end
+Add 107.0 n 1200.0 107.0
+:elseif_5
+:if_19_end
+:f_addPoints_1_end
+Cell Return
+:f_tetris_checkRows_0_start
+Add 84.0 n 1.0 84.0
+:for_0_start
+Init 0.0 110.0
+If < 110.0 n 4.0 :for_0_end
+:for_0_loop
+:for_1_start
+Init 0.0 111.0
+If < 111.0 n 4.0 :for_1_end
+:for_1_loop
+:if_20_start
+Math * 111.0 n 4.0 17.0
+Add 17.0 c 110.0 17.0
+Add 17.0 n 86.0 17.0
+Math CC 17.0 17.0
+If == 17.0 n 1.0 :if_20_end
+Add 110.0 c 84.0 109.0
+Cell Jump :for_1_end
+:elseif_6
+:if_20_end
+:for_1_check
+Add 111.0 n 1.0 111.0
+If >= 111.0 n 4.0 :for_1_loop
+:for_1_end
+:for_0_check
+Add 110.0 n 1.0 110.0
+If >= 110.0 n 4.0 :for_0_loop
+:for_0_end
+:for_2_start
+Init 4.0 113.0
+If >= 113.0 n 0.0 :for_2_end
+:for_2_loop
+:for_3_start
+Init 0.0 114.0
+If < 114.0 n 4.0 :for_3_end
+:for_3_loop
+:if_21_start
+Math * 114.0 n 4.0 17.0
+Add 17.0 c 113.0 17.0
+Add 17.0 n 86.0 17.0
+Math CC 17.0 17.0
+If == 17.0 n 1.0 :if_21_end
+Add 113.0 c 84.0 112.0
+Cell Jump :for_3_end
+:elseif_7
+:if_21_end
+:for_3_check
+Add 114.0 n 1.0 114.0
+If >= 114.0 n 4.0 :for_3_loop
+:for_3_end
+:for_2_check
+Add 113.0 n -1.0 113.0
+If < 113.0 n 0.0 :for_2_loop
+:for_2_end
+Init 0.0 115.0
+:for_4_start
+Copy 109.0 116.0
+If >= 116.0 c 112.0 :for_4_end
+:for_4_loop
+:if_22_start
+Copy 116.0 71.0
+Cell Call :f_tetris_checkRow_1_start
+Copy 0.0 0.0
+If == 0.0 n 1.0 :if_22_end
+Copy 116.0 72.0
+Cell Call :f_tetris_dropLayersDown_1_start
+Add 116.0 n 1.0 116.0
+Add 115.0 n 1.0 115.0
+:elseif_8
+:if_22_end
+:for_4_check
+Add 116.0 n -1.0 116.0
+If < 116.0 c 112.0 :for_4_loop
+:for_4_end
+Copy 115.0 0.0
+Cell Return
+:f_tetris_checkRows_0_end
+Cell Return
+:f_tetris_checkRow_1_start
+:for_5_start
+Init 2.0 117.0
+Init 12.0 17.0
+If < 117.0 c 17.0 :for_5_end
+:for_5_loop
+Pixel c 117.0 c 71.0 77.0
+:if_23_start
+If == 77.0 n 255.0 :if_23_end
+Init 0.0 0.0
+Cell Return
+:if_23_end
+:for_5_check
+Add 117.0 n 1.0 117.0
+Init 12.0 17.0
+If >= 117.0 c 17.0 :for_5_loop
+:for_5_end
+Init 1.0 0.0
+Cell Return
+:f_tetris_checkRow_1_end
+Cell Return
+:f_tetris_dropLayersDown_1_start
+:for_6_start
+If > 72.0 n 2.0 :for_6_end
+:for_6_loop
+Math - 72.0 n 1.0 118.0
+:for_7_start
+Init 2.0 119.0
+Init 12.0 17.0
+If < 119.0 c 17.0 :for_7_end
+:for_7_loop
+Pixel c 119.0 c 118.0 77.0
+Pixel Cache c 77.0 c 78.0 c 79.0
+Pixel c 119.0 c 72.0 -1.0
+:for_7_check
+Add 119.0 n 1.0 119.0
+Init 12.0 17.0
+If >= 119.0 c 17.0 :for_7_loop
+:for_7_end
+:for_6_check
+Add 72.0 n -1.0 72.0
+If <= 72.0 n 2.0 :for_6_loop
+:for_6_end
+:f_tetris_dropLayersDown_1_end
+Cell Return
+:f_tetris_drawPovars_0_start
+Copy 107.0 127.0
+Init 0.0 128.0
+:if_24_start
+If == 107.0 n 0.0 :if_24_end
+Init 48.0 126.0
+Init 1.0 128.0
+Cell Jump :elseif_9
+:if_24_end
+:bracket_1_start
+:for_8_start
+If > 127.0 n 0.0 :for_8_end
+:for_8_loop
+Math % 127.0 n 10.0 129.0
+Init 6.0 11.0
+Math - 11.0 c 128.0 11.0
+Add 11.0 n 120.0 11.0
+Add 129.0 n 48.0 13.0
+Math CW 13.0 11.0
+Math / 127.0 n 10.0 127.0
+Math % 127.0 n 1.0 12.0
+Math - 127.0 c 12.0 127.0
+:for_8_check
+Add 128.0 n 1.0 128.0
+If <= 127.0 n 0.0 :for_8_loop
+:for_8_end
+:elseif_9
+:bracket_1_end
+Pixel Cache Raw 1.6777215E7
+Math * 128.0 n 7.0 130.0
+Add 130.0 n 25.0 130.0
+:for_9_start
+Init 2.0 131.0
+Init 10.0 17.0
+If < 131.0 c 17.0 :for_9_end
+:for_9_loop
+:for_10_start
+Init 25.0 132.0
+If < 132.0 c 130.0 :for_10_end
+:for_10_loop
+Pixel c 132.0 c 131.0 -1.0
+:for_10_check
+Add 132.0 n 1.0 132.0
+If >= 132.0 c 130.0 :for_10_loop
+:for_10_end
+:for_9_check
+Add 131.0 n 1.0 131.0
+Init 10.0 17.0
+If >= 131.0 c 17.0 :for_9_loop
+:for_9_end
+Pixel Cache Raw 1907745.0
+Init 25.0 133.0
+:for_11_start
+Init 7.0 134.0
+Math - 134.0 c 128.0 134.0
+If < 134.0 n 7.0 :for_11_end
+:for_11_loop
+Copy 133.0 57.0
+Init -3.0 58.0
+Add 134.0 n 120.0 56.0
+Math CC 56.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Copy 0.0 12.0
+Add 133.0 c 12.0 133.0
+:for_11_check
+Add 134.0 n 1.0 134.0
+If >= 134.0 n 7.0 :for_11_loop
+:for_11_end
+:f_tetris_drawPovars_0_end
+Cell Return
+:f_tetris_lose_0_start
+Pixel Cache Raw 3949737.0
+Init 15.0 57.0
+Init 15.0 58.0
+Init 39.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 114.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 39.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 32.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 116.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 111.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 32.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 114.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 101.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 116.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 114.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 121.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Init 15.0 57.0
+Init 22.0 58.0
+Init 39.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 101.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 39.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 32.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 116.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 111.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 32.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 101.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 120.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 105.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 116.0 56.0
+Cell Call :f_smalldrawchar_3_start
+:if_25_start
+If > 76.0 n 0.0 :if_25_end
+Device Log c 76.0
+Add 76.0 n -1.0 76.0
+Cell Call :f_tetris_play_0_start
+Cell Jump -2.0
+:if_25_end
+:if_26_start
+:while_1_start
+:while_1_loop
+:if_27_start
+If != 4.0 n -1.0 :if_27_end
+:if_28_start
+If == 4.0 n 114.0 :if_28_end
+Cell Call :f_tetris_play_0_start
+Cell Jump -2.0
+Cell Jump :elseif_10
+:if_28_end
+:if_29_start
+If == 4.0 n 101.0 :if_29_end
+Cell Jump -2.0
+:elseif_10
+:if_29_end
+:if_27_end
+Device CoreWait 1.0
+:while_1_check
+Cell Jump :while_1_start
+:while_1_end
+:if_26_end
+Cell Jump -2.0
+:f_tetris_lose_0_end
+Cell Return
+:f_tetris_drawNextBlock_0_start
+Copy 106.0 73.0
+Cell Call :f_tetris_setBlockArrayFromBlockType_1_start
+Pixel Cache Raw 1.6777215E7
+:for_12_start
+Init 14.0 135.0
+Init 18.0 17.0
+If < 135.0 c 17.0 :for_12_end
+:for_12_loop
+:for_13_start
+Init 15.0 136.0
+Init 19.0 17.0
+If < 136.0 c 17.0 :for_13_end
+:for_13_loop
+Pixel c 136.0 c 135.0 -1.0
+:for_13_check
+Add 136.0 n 1.0 136.0
+Init 19.0 17.0
+If >= 136.0 c 17.0 :for_13_loop
+:for_13_end
+:for_12_check
+Add 135.0 n 1.0 135.0
+Init 18.0 17.0
+If >= 135.0 c 17.0 :for_12_loop
+:for_12_end
+Init 15.0 74.0
+Init 14.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+:f_tetris_drawNextBlock_0_end
+Cell Return
+:f_tetris_newBlock_0_start
+Copy 106.0 85.0
+:if_30_start
+Cell Jump :if_30_end
+Add 106.0 n 1.0 106.0
+:if_31_start
+If > 106.0 n 6.0 :if_31_end
+Init 0.0 106.0
+:if_31_end
+Cell Jump :elseif_11
+:if_30_end
+:bracket_2_start
+Math R 0.0 6.0 106.0
+:elseif_11
+:bracket_2_end
+Cell Call :f_tetris_drawNextBlock_0_start
+Init 1.0 104.0
+Init 6.0 83.0
+Math - 83.0 n 1.0 83.0
+Init 2.0 84.0
+Copy 85.0 73.0
+Cell Call :f_tetris_setBlockArrayFromBlockType_1_start
+:f_tetris_newBlock_0_end
+Cell Return
+:f_tetris_setBlockArrayFromBlockType_1_start
+:if_32_start
+If == 73.0 n 0.0 :if_32_end
+Init 1.0 80.0
+Init 254.0 81.0
+Init 254.0 82.0
+Init 0.0 86.0
+Init 1.0 90.0
+Init 0.0 94.0
+Init 0.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 0.0 95.0
+Init 0.0 99.0
+Init 0.0 88.0
+Init 1.0 92.0
+Init 0.0 96.0
+Init 0.0 100.0
+Init 0.0 89.0
+Init 1.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+Cell Jump :elseif_12
+:if_32_end
+:if_33_start
+If == 73.0 n 1.0 :if_33_end
+Init 88.0 80.0
+Init 102.0 81.0
+Init 175.0 82.0
+Init 0.0 86.0
+Init 1.0 90.0
+Init 0.0 94.0
+Init 0.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 1.0 95.0
+Init 1.0 99.0
+Init 0.0 88.0
+Init 0.0 92.0
+Init 0.0 96.0
+Init 0.0 100.0
+Init 0.0 89.0
+Init 0.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+Cell Jump :elseif_12
+:if_33_end
+:if_34_start
+If == 73.0 n 2.0 :if_34_end
+Init 239.0 80.0
+Init 121.0 81.0
+Init 34.0 82.0
+Init 0.0 86.0
+Init 0.0 90.0
+Init 0.0 94.0
+Init 1.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 1.0 95.0
+Init 1.0 99.0
+Init 0.0 88.0
+Init 0.0 92.0
+Init 0.0 96.0
+Init 0.0 100.0
+Init 0.0 89.0
+Init 0.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+Cell Jump :elseif_12
+:if_34_end
+:if_35_start
+If == 73.0 n 3.0 :if_35_end
+Init 247.0 80.0
+Init 214.0 81.0
+Init 9.0 82.0
+Init 0.0 86.0
+Init 0.0 90.0
+Init 0.0 94.0
+Init 0.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 1.0 95.0
+Init 0.0 99.0
+Init 0.0 88.0
+Init 1.0 92.0
+Init 1.0 96.0
+Init 0.0 100.0
+Init 0.0 89.0
+Init 0.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+Cell Jump :elseif_12
+:if_35_end
+:if_36_start
+If == 73.0 n 4.0 :if_36_end
+Init 64.0 80.0
+Init 183.0 81.0
+Init 63.0 82.0
+Init 0.0 86.0
+Init 0.0 90.0
+Init 0.0 94.0
+Init 0.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 1.0 95.0
+Init 0.0 99.0
+Init 1.0 88.0
+Init 1.0 92.0
+Init 0.0 96.0
+Init 0.0 100.0
+Init 0.0 89.0
+Init 0.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+Cell Jump :elseif_12
+:if_36_end
+:if_37_start
+If == 73.0 n 5.0 :if_37_end
+Init 174.0 80.0
+Init 77.0 81.0
+Init 158.0 82.0
+Init 0.0 86.0
+Init 0.0 90.0
+Init 0.0 94.0
+Init 0.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 0.0 95.0
+Init 0.0 99.0
+Init 1.0 88.0
+Init 1.0 92.0
+Init 1.0 96.0
+Init 0.0 100.0
+Init 0.0 89.0
+Init 0.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+Cell Jump :elseif_12
+:if_37_end
+:if_38_start
+If == 73.0 n 6.0 :if_38_end
+Init 240.0 80.0
+Init 30.0 81.0
+Init 43.0 82.0
+Init 0.0 86.0
+Init 0.0 90.0
+Init 0.0 94.0
+Init 0.0 98.0
+Init 0.0 87.0
+Init 1.0 91.0
+Init 1.0 95.0
+Init 0.0 99.0
+Init 0.0 88.0
+Init 0.0 92.0
+Init 1.0 96.0
+Init 1.0 100.0
+Init 0.0 89.0
+Init 0.0 93.0
+Init 0.0 97.0
+Init 0.0 101.0
+:elseif_12
+:if_38_end
+:f_tetris_setBlockArrayFromBlockType_1_end
+Cell Return
+:f_tetris_drawBorders_0_start
+Pixel Cache Raw 1907745.0
+:for_14_start
+Init 10.0 137.0
+Init 34.0 17.0
+If < 137.0 c 17.0 :for_14_end
+:for_14_loop
+Pixel n 1.0 c 137.0 -1.0
+Pixel n 12.0 c 137.0 -1.0
+:for_14_check
+Add 137.0 n 1.0 137.0
+Init 34.0 17.0
+If >= 137.0 c 17.0 :for_14_loop
+:for_14_end
+:for_15_start
+Init 2.0 138.0
+Init 12.0 17.0
+If < 138.0 c 17.0 :for_15_end
+:for_15_loop
+Pixel c 138.0 n 33.0 -1.0
+:for_15_check
+Add 138.0 n 1.0 138.0
+Init 12.0 17.0
+If >= 138.0 c 17.0 :for_15_loop
+:for_15_end
+Pixel Cache Raw 8439583.0
+Init 21.0 57.0
+Init 7.0 58.0
+Init 60.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 45.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 32.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 78.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 101.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 120.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Add 57.0 c 0.0 57.0
+Add 57.0 n 0.0 57.0
+Init 116.0 56.0
+Cell Call :f_smalldrawchar_3_start
+Pixel Cache Raw 1.154615E7
+:for_16_start
+Init 1.0 139.0
+Init 11.0 17.0
+If < 139.0 c 17.0 :for_16_end
+:for_16_loop
+Pixel n 23.0 c 139.0 -1.0
+Pixel n 70.0 c 139.0 -1.0
+:for_16_check
+Add 139.0 n 1.0 139.0
+Init 11.0 17.0
+If >= 139.0 c 17.0 :for_16_loop
+:for_16_end
+:for_17_start
+Init 23.0 140.0
+Init 71.0 17.0
+If < 140.0 c 17.0 :for_17_end
+:for_17_loop
+Pixel c 140.0 n 1.0 -1.0
+Pixel c 140.0 n 10.0 -1.0
+:for_17_check
+Add 140.0 n 1.0 140.0
+Init 71.0 17.0
+If >= 140.0 c 17.0 :for_17_loop
+:for_17_end
+:f_tetris_drawBorders_0_end
+Cell Return
+:f_tetris_down_0_start
+Add 83.0 n 1.0 141.0
+Add 83.0 n 2.0 142.0
+Add 83.0 n 3.0 143.0
+Add 84.0 n 1.0 144.0
+Add 84.0 n 2.0 145.0
+Add 84.0 n 3.0 146.0
+Add 84.0 n 4.0 147.0
+:if_39_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_39_end
+:if_40_start
+Copy 87.0 17.0
+If == 17.0 n 0.0 :if_40_end
+Pixel c 83.0 c 144.0 77.0
+:if_41_start
+If != 77.0 n 255.0 :if_41_end
+Init 1.0 102.0
+Cell Return
+:if_41_end
+:if_40_end
+:elseif_13
+:if_39_end
+:if_42_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_42_end
+:if_43_start
+Copy 91.0 17.0
+If == 17.0 n 0.0 :if_43_end
+Pixel c 141.0 c 144.0 77.0
+:if_44_start
+If != 77.0 n 255.0 :if_44_end
+Init 1.0 102.0
+Cell Return
+:if_44_end
+:if_43_end
+:elseif_14
+:if_42_end
+:if_45_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_45_end
+:if_46_start
+Copy 95.0 17.0
+If == 17.0 n 0.0 :if_46_end
+Pixel c 142.0 c 144.0 77.0
+:if_47_start
+If != 77.0 n 255.0 :if_47_end
+Init 1.0 102.0
+Cell Return
+:if_47_end
+:if_46_end
+:elseif_15
+:if_45_end
+:if_48_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_48_end
+:if_49_start
+Copy 99.0 17.0
+If == 17.0 n 0.0 :if_49_end
+Pixel c 143.0 c 144.0 77.0
+:if_50_start
+If != 77.0 n 255.0 :if_50_end
+Init 1.0 102.0
+Cell Return
+:if_50_end
+:if_49_end
+:elseif_16
+:if_48_end
+:if_51_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_51_end
+:if_52_start
+Copy 88.0 17.0
+If == 17.0 n 0.0 :if_52_end
+Pixel c 83.0 c 145.0 77.0
+:if_53_start
+If != 77.0 n 255.0 :if_53_end
+Init 1.0 102.0
+Cell Return
+:if_53_end
+:if_52_end
+:elseif_17
+:if_51_end
+:if_54_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_54_end
+:if_55_start
+Copy 92.0 17.0
+If == 17.0 n 0.0 :if_55_end
+Pixel c 141.0 c 145.0 77.0
+:if_56_start
+If != 77.0 n 255.0 :if_56_end
+Init 1.0 102.0
+Cell Return
+:if_56_end
+:if_55_end
+:if_54_end
+:if_57_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_57_end
+:if_58_start
+Copy 96.0 17.0
+If == 17.0 n 0.0 :if_58_end
+Pixel c 142.0 c 145.0 77.0
+:if_59_start
+If != 77.0 n 255.0 :if_59_end
+Init 1.0 102.0
+Cell Return
+:if_59_end
+:if_58_end
+:if_57_end
+:if_60_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_60_end
+:if_61_start
+Copy 100.0 17.0
+If == 17.0 n 0.0 :if_61_end
+Pixel c 143.0 c 145.0 77.0
+:if_62_start
+If != 77.0 n 255.0 :if_62_end
+Init 1.0 102.0
+Cell Return
+:if_62_end
+:if_61_end
+:if_60_end
+:if_63_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_63_end
+:if_64_start
+Copy 89.0 17.0
+If == 17.0 n 0.0 :if_64_end
+Pixel c 83.0 c 146.0 77.0
+:if_65_start
+If != 77.0 n 255.0 :if_65_end
+Init 1.0 102.0
+Cell Return
+:if_65_end
+:if_64_end
+:if_63_end
+:if_66_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_66_end
+:if_67_start
+Copy 93.0 17.0
+If == 17.0 n 0.0 :if_67_end
+Pixel c 141.0 c 146.0 77.0
+:if_68_start
+If != 77.0 n 255.0 :if_68_end
+Init 1.0 102.0
+Cell Return
+:if_68_end
+:if_67_end
+:if_66_end
+:if_69_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_69_end
+:if_70_start
+Copy 97.0 17.0
+If == 17.0 n 0.0 :if_70_end
+Pixel c 142.0 c 146.0 77.0
+:if_71_start
+If != 77.0 n 255.0 :if_71_end
+Init 1.0 102.0
+Cell Return
+:if_71_end
+:if_70_end
+:if_69_end
+:if_72_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_72_end
+:if_73_start
+Copy 101.0 17.0
+If == 17.0 n 0.0 :if_73_end
+Pixel c 143.0 c 146.0 77.0
+:if_74_start
+If != 77.0 n 255.0 :if_74_end
+Init 1.0 102.0
+Cell Return
+:if_74_end
+:if_73_end
+:if_72_end
+:if_75_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_75_end
+Pixel c 83.0 c 147.0 77.0
+:if_76_start
+If != 77.0 n 255.0 :if_76_end
+Init 1.0 102.0
+Cell Return
+:if_76_end
+:if_75_end
+:if_77_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_77_end
+Pixel c 141.0 c 147.0 77.0
+:if_78_start
+If != 77.0 n 255.0 :if_78_end
+Init 1.0 102.0
+Cell Return
+:if_78_end
+:if_77_end
+:if_79_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_79_end
+Pixel c 142.0 c 147.0 77.0
+:if_80_start
+If != 77.0 n 255.0 :if_80_end
+Init 1.0 102.0
+Cell Return
+:if_80_end
+:if_79_end
+:if_81_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_81_end
+Pixel c 143.0 c 147.0 77.0
+:if_82_start
+If != 77.0 n 255.0 :if_82_end
+Init 1.0 102.0
+Cell Return
+:if_82_end
+:if_81_end
+Pixel Cache Raw 1.6777215E7
+:if_83_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_83_end
+Pixel c 83.0 c 84.0 -1.0
+:if_83_end
+:if_84_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_84_end
+Pixel c 141.0 c 84.0 -1.0
+:if_84_end
+:if_85_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_85_end
+Pixel c 142.0 c 84.0 -1.0
+:if_85_end
+:if_86_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_86_end
+Pixel c 143.0 c 84.0 -1.0
+:if_86_end
+:if_87_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_87_end
+Pixel c 83.0 c 144.0 -1.0
+:if_87_end
+:if_88_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_88_end
+Pixel c 141.0 c 144.0 -1.0
+:if_88_end
+:if_89_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_89_end
+Pixel c 142.0 c 144.0 -1.0
+:if_89_end
+:if_90_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_90_end
+Pixel c 143.0 c 144.0 -1.0
+:if_90_end
+:if_91_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_91_end
+Pixel c 83.0 c 145.0 -1.0
+:if_91_end
+:if_92_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_92_end
+Pixel c 141.0 c 145.0 -1.0
+:if_92_end
+:if_93_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_93_end
+Pixel c 142.0 c 145.0 -1.0
+:if_93_end
+:if_94_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_94_end
+Pixel c 143.0 c 145.0 -1.0
+:if_94_end
+:if_95_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_95_end
+Pixel c 83.0 c 146.0 -1.0
+:if_95_end
+:if_96_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_96_end
+Pixel c 141.0 c 146.0 -1.0
+:if_96_end
+:if_97_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_97_end
+Pixel c 142.0 c 146.0 -1.0
+:if_97_end
+:if_98_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_98_end
+Pixel c 143.0 c 146.0 -1.0
+:if_98_end
+Add 84.0 n 1.0 84.0
+:f_tetris_down_0_end
+Cell Return
+:f_tetris_right_0_start
+Add 83.0 n 1.0 148.0
+Add 83.0 n 2.0 149.0
+Add 83.0 n 3.0 150.0
+Add 83.0 n 4.0 151.0
+Add 84.0 n 1.0 152.0
+Add 84.0 n 2.0 153.0
+Add 84.0 n 3.0 154.0
+:if_99_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_99_end
+:if_100_start
+Copy 90.0 17.0
+If == 17.0 n 0.0 :if_100_end
+Pixel c 148.0 c 84.0 77.0
+:if_101_start
+If != 77.0 n 255.0 :if_101_end
+Cell Return
+:if_101_end
+:if_100_end
+:if_99_end
+:if_102_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_102_end
+:if_103_start
+Copy 91.0 17.0
+If == 17.0 n 0.0 :if_103_end
+Pixel c 148.0 c 152.0 77.0
+:if_104_start
+If != 77.0 n 255.0 :if_104_end
+Cell Return
+:if_104_end
+:if_103_end
+:if_102_end
+:if_105_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_105_end
+:if_106_start
+Copy 92.0 17.0
+If == 17.0 n 0.0 :if_106_end
+Pixel c 148.0 c 153.0 77.0
+:if_107_start
+If != 77.0 n 255.0 :if_107_end
+Cell Return
+:if_107_end
+:if_106_end
+:if_105_end
+:if_108_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_108_end
+:if_109_start
+Copy 93.0 17.0
+If == 17.0 n 0.0 :if_109_end
+Pixel c 148.0 c 154.0 77.0
+:if_110_start
+If != 77.0 n 255.0 :if_110_end
+Cell Return
+:if_110_end
+:if_109_end
+:if_108_end
+:if_111_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_111_end
+:if_112_start
+Copy 94.0 17.0
+If == 17.0 n 0.0 :if_112_end
+Pixel c 149.0 c 84.0 77.0
+:if_113_start
+If != 77.0 n 255.0 :if_113_end
+Cell Return
+:if_113_end
+:if_112_end
+:if_111_end
+:if_114_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_114_end
+:if_115_start
+Copy 95.0 17.0
+If == 17.0 n 0.0 :if_115_end
+Pixel c 149.0 c 152.0 77.0
+:if_116_start
+If != 77.0 n 255.0 :if_116_end
+Cell Return
+:if_116_end
+:if_115_end
+:if_114_end
+:if_117_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_117_end
+:if_118_start
+Copy 96.0 17.0
+If == 17.0 n 0.0 :if_118_end
+Pixel c 149.0 c 153.0 77.0
+:if_119_start
+If != 77.0 n 255.0 :if_119_end
+Cell Return
+:if_119_end
+:if_118_end
+:if_117_end
+:if_120_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_120_end
+:if_121_start
+Copy 97.0 17.0
+If == 17.0 n 0.0 :if_121_end
+Pixel c 149.0 c 154.0 77.0
+:if_122_start
+If != 77.0 n 255.0 :if_122_end
+Cell Return
+:if_122_end
+:if_121_end
+:if_120_end
+:if_123_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_123_end
+:if_124_start
+Copy 98.0 17.0
+If == 17.0 n 0.0 :if_124_end
+Pixel c 150.0 c 84.0 77.0
+:if_125_start
+If != 77.0 n 255.0 :if_125_end
+Cell Return
+:if_125_end
+:if_124_end
+:if_123_end
+:if_126_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_126_end
+:if_127_start
+Copy 99.0 17.0
+If == 17.0 n 0.0 :if_127_end
+Pixel c 150.0 c 152.0 77.0
+:if_128_start
+If != 77.0 n 255.0 :if_128_end
+Cell Return
+:if_128_end
+:if_127_end
+:if_126_end
+:if_129_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_129_end
+:if_130_start
+Copy 100.0 17.0
+If == 17.0 n 0.0 :if_130_end
+Pixel c 150.0 c 153.0 77.0
+:if_131_start
+If != 77.0 n 255.0 :if_131_end
+Cell Return
+:if_131_end
+:if_130_end
+:if_129_end
+:if_132_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_132_end
+:if_133_start
+Copy 101.0 17.0
+If == 17.0 n 0.0 :if_133_end
+Pixel c 150.0 c 154.0 77.0
+:if_134_start
+If != 77.0 n 255.0 :if_134_end
+Cell Return
+:if_134_end
+:if_133_end
+:if_132_end
+:if_135_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_135_end
+Pixel c 151.0 c 84.0 77.0
+:if_136_start
+If != 77.0 n 255.0 :if_136_end
+Cell Return
+:if_136_end
+:if_135_end
+:if_137_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_137_end
+Pixel c 151.0 c 152.0 77.0
+:if_138_start
+If != 77.0 n 255.0 :if_138_end
+Cell Return
+:if_138_end
+:if_137_end
+:if_139_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_139_end
+Pixel c 151.0 c 153.0 77.0
+:if_140_start
+If != 77.0 n 255.0 :if_140_end
+Cell Return
+:if_140_end
+:if_139_end
+:if_141_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_141_end
+Pixel c 151.0 c 154.0 77.0
+:if_142_start
+If != 77.0 n 255.0 :if_142_end
+Cell Return
+:if_142_end
+:if_141_end
+Pixel Cache Raw 1.6777215E7
+:if_143_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_143_end
+Pixel c 83.0 c 84.0 -1.0
+:if_143_end
+:if_144_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_144_end
+Pixel c 148.0 c 84.0 -1.0
+:if_144_end
+:if_145_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_145_end
+Pixel c 149.0 c 84.0 -1.0
+:if_145_end
+:if_146_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_146_end
+Pixel c 150.0 c 84.0 -1.0
+:if_146_end
+:if_147_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_147_end
+Pixel c 83.0 c 152.0 -1.0
+:if_147_end
+:if_148_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_148_end
+Pixel c 148.0 c 152.0 -1.0
+:if_148_end
+:if_149_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_149_end
+Pixel c 149.0 c 152.0 -1.0
+:if_149_end
+:if_150_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_150_end
+Pixel c 150.0 c 152.0 -1.0
+:if_150_end
+:if_151_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_151_end
+Pixel c 83.0 c 153.0 -1.0
+:if_151_end
+:if_152_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_152_end
+Pixel c 148.0 c 153.0 -1.0
+:if_152_end
+:if_153_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_153_end
+Pixel c 149.0 c 153.0 -1.0
+:if_153_end
+:if_154_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_154_end
+Pixel c 150.0 c 153.0 -1.0
+:if_154_end
+:if_155_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_155_end
+Pixel c 83.0 c 154.0 -1.0
+:if_155_end
+:if_156_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_156_end
+Pixel c 148.0 c 154.0 -1.0
+:if_156_end
+:if_157_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_157_end
+Pixel c 149.0 c 154.0 -1.0
+:if_157_end
+:if_158_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_158_end
+Pixel c 150.0 c 154.0 -1.0
+:if_158_end
+Add 83.0 n 1.0 83.0
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+:f_tetris_right_0_end
+Cell Return
+:f_tetris_left_0_start
+Math - 83.0 n 1.0 155.0
+Add 83.0 n 1.0 156.0
+Add 83.0 n 2.0 157.0
+Add 83.0 n 3.0 158.0
+Add 84.0 n 1.0 159.0
+Add 84.0 n 2.0 160.0
+Add 84.0 n 3.0 161.0
+:if_159_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_159_end
+:if_160_start
+Copy 94.0 17.0
+If == 17.0 n 0.0 :if_160_end
+Pixel c 157.0 c 84.0 77.0
+:if_161_start
+If != 77.0 n 255.0 :if_161_end
+Cell Return
+:if_161_end
+:if_160_end
+:if_159_end
+:if_162_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_162_end
+:if_163_start
+Copy 95.0 17.0
+If == 17.0 n 0.0 :if_163_end
+Pixel c 157.0 c 159.0 77.0
+:if_164_start
+If != 77.0 n 255.0 :if_164_end
+Cell Return
+:if_164_end
+:if_163_end
+:if_162_end
+:if_165_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_165_end
+:if_166_start
+Copy 96.0 17.0
+If == 17.0 n 0.0 :if_166_end
+Pixel c 157.0 c 160.0 77.0
+:if_167_start
+If != 77.0 n 255.0 :if_167_end
+Cell Return
+:if_167_end
+:if_166_end
+:if_165_end
+:if_168_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_168_end
+:if_169_start
+Copy 97.0 17.0
+If == 17.0 n 0.0 :if_169_end
+Pixel c 157.0 c 161.0 77.0
+:if_170_start
+If != 77.0 n 255.0 :if_170_end
+Cell Return
+:if_170_end
+:if_169_end
+:if_168_end
+:if_171_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_171_end
+:if_172_start
+Copy 90.0 17.0
+If == 17.0 n 0.0 :if_172_end
+Pixel c 156.0 c 84.0 77.0
+:if_173_start
+If != 77.0 n 255.0 :if_173_end
+Cell Return
+:if_173_end
+:if_172_end
+:if_171_end
+:if_174_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_174_end
+:if_175_start
+Copy 91.0 17.0
+If == 17.0 n 0.0 :if_175_end
+Pixel c 156.0 c 159.0 77.0
+:if_176_start
+If != 77.0 n 255.0 :if_176_end
+Cell Return
+:if_176_end
+:if_175_end
+:if_174_end
+:if_177_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_177_end
+:if_178_start
+Copy 92.0 17.0
+If == 17.0 n 0.0 :if_178_end
+Pixel c 156.0 c 160.0 77.0
+:if_179_start
+If != 77.0 n 255.0 :if_179_end
+Cell Return
+:if_179_end
+:if_178_end
+:if_177_end
+:if_180_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_180_end
+:if_181_start
+Copy 93.0 17.0
+If == 17.0 n 0.0 :if_181_end
+Pixel c 156.0 c 161.0 77.0
+:if_182_start
+If != 77.0 n 255.0 :if_182_end
+Cell Return
+:if_182_end
+:if_181_end
+:if_180_end
+:if_183_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_183_end
+:if_184_start
+Copy 86.0 17.0
+If == 17.0 n 0.0 :if_184_end
+Pixel c 83.0 c 84.0 77.0
+:if_185_start
+If != 77.0 n 255.0 :if_185_end
+Cell Return
+:if_185_end
+:if_184_end
+:if_183_end
+:if_186_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_186_end
+:if_187_start
+Copy 87.0 17.0
+If == 17.0 n 0.0 :if_187_end
+Pixel c 83.0 c 159.0 77.0
+:if_188_start
+If != 77.0 n 255.0 :if_188_end
+Cell Return
+:if_188_end
+:if_187_end
+:if_186_end
+:if_189_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_189_end
+:if_190_start
+Copy 88.0 17.0
+If == 17.0 n 0.0 :if_190_end
+Pixel c 83.0 c 160.0 77.0
+:if_191_start
+If != 77.0 n 255.0 :if_191_end
+Cell Return
+:if_191_end
+:if_190_end
+:if_189_end
+:if_192_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_192_end
+:if_193_start
+Copy 89.0 17.0
+If == 17.0 n 0.0 :if_193_end
+Pixel c 83.0 c 161.0 77.0
+:if_194_start
+If != 77.0 n 255.0 :if_194_end
+Cell Return
+:if_194_end
+:if_193_end
+:if_192_end
+:if_195_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_195_end
+Pixel c 155.0 c 84.0 77.0
+:if_196_start
+If != 77.0 n 255.0 :if_196_end
+Cell Return
+:if_196_end
+:if_195_end
+:if_197_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_197_end
+Pixel c 155.0 c 159.0 77.0
+:if_198_start
+If != 77.0 n 255.0 :if_198_end
+Cell Return
+:if_198_end
+:if_197_end
+:if_199_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_199_end
+Pixel c 155.0 c 160.0 77.0
+:if_200_start
+If != 77.0 n 255.0 :if_200_end
+Cell Return
+:if_200_end
+:if_199_end
+:if_201_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_201_end
+Pixel c 155.0 c 161.0 77.0
+:if_202_start
+If != 77.0 n 255.0 :if_202_end
+Cell Return
+:if_202_end
+:if_201_end
+Pixel Cache Raw 1.6777215E7
+:if_203_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_203_end
+Pixel c 83.0 c 84.0 -1.0
+:if_203_end
+:if_204_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_204_end
+Pixel c 156.0 c 84.0 -1.0
+:if_204_end
+:if_205_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_205_end
+Pixel c 157.0 c 84.0 -1.0
+:if_205_end
+:if_206_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_206_end
+Pixel c 158.0 c 84.0 -1.0
+:if_206_end
+:if_207_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_207_end
+Pixel c 83.0 c 159.0 -1.0
+:if_207_end
+:if_208_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_208_end
+Pixel c 156.0 c 159.0 -1.0
+:if_208_end
+:if_209_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_209_end
+Pixel c 157.0 c 159.0 -1.0
+:if_209_end
+:if_210_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_210_end
+Pixel c 158.0 c 159.0 -1.0
+:if_210_end
+:if_211_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_211_end
+Pixel c 83.0 c 160.0 -1.0
+:if_211_end
+:if_212_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_212_end
+Pixel c 156.0 c 160.0 -1.0
+:if_212_end
+:if_213_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_213_end
+Pixel c 157.0 c 160.0 -1.0
+:if_213_end
+:if_214_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_214_end
+Pixel c 158.0 c 160.0 -1.0
+:if_214_end
+:if_215_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_215_end
+Pixel c 83.0 c 161.0 -1.0
+:if_215_end
+:if_216_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_216_end
+Pixel c 156.0 c 161.0 -1.0
+:if_216_end
+:if_217_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_217_end
+Pixel c 157.0 c 161.0 -1.0
+:if_217_end
+:if_218_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_218_end
+Pixel c 158.0 c 161.0 -1.0
+:if_218_end
+Add 83.0 n -1.0 83.0
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+:f_tetris_left_0_end
+Cell Return
+:f_tetris_rotate_right_0_start
+Add 83.0 n 1.0 162.0
+Add 83.0 n 2.0 163.0
+Add 83.0 n 3.0 164.0
+Add 84.0 n 1.0 165.0
+Add 84.0 n 2.0 166.0
+Add 84.0 n 3.0 167.0
+:if_219_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_219_end
+:if_220_start
+Copy 98.0 17.0
+If == 17.0 n 0.0 :if_220_end
+Pixel c 164.0 c 84.0 77.0
+:if_221_start
+If != 77.0 n 255.0 :if_221_end
+Cell Return
+:if_221_end
+:if_220_end
+:if_219_end
+:if_222_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_222_end
+:if_223_start
+Copy 99.0 17.0
+If == 17.0 n 0.0 :if_223_end
+Pixel c 164.0 c 165.0 77.0
+:if_224_start
+If != 77.0 n 255.0 :if_224_end
+Cell Return
+:if_224_end
+:if_223_end
+:if_222_end
+:if_225_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_225_end
+:if_226_start
+Copy 100.0 17.0
+If == 17.0 n 0.0 :if_226_end
+Pixel c 164.0 c 166.0 77.0
+:if_227_start
+If != 77.0 n 255.0 :if_227_end
+Cell Return
+:if_227_end
+:if_226_end
+:if_225_end
+:if_228_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_228_end
+:if_229_start
+Copy 101.0 17.0
+If == 17.0 n 0.0 :if_229_end
+Pixel c 164.0 c 167.0 77.0
+:if_230_start
+If != 77.0 n 255.0 :if_230_end
+Cell Return
+:if_230_end
+:if_229_end
+:if_228_end
+:if_231_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_231_end
+:if_232_start
+Copy 94.0 17.0
+If == 17.0 n 0.0 :if_232_end
+Pixel c 163.0 c 84.0 77.0
+:if_233_start
+If != 77.0 n 255.0 :if_233_end
+Cell Return
+:if_233_end
+:if_232_end
+:if_231_end
+:if_234_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_234_end
+:if_235_start
+Copy 95.0 17.0
+If == 17.0 n 0.0 :if_235_end
+Pixel c 163.0 c 165.0 77.0
+:if_236_start
+If != 77.0 n 255.0 :if_236_end
+Cell Return
+:if_236_end
+:if_235_end
+:if_234_end
+:if_237_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_237_end
+:if_238_start
+Copy 96.0 17.0
+If == 17.0 n 0.0 :if_238_end
+Pixel c 163.0 c 166.0 77.0
+:if_239_start
+If != 77.0 n 255.0 :if_239_end
+Cell Return
+:if_239_end
+:if_238_end
+:if_237_end
+:if_240_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_240_end
+:if_241_start
+Copy 97.0 17.0
+If == 17.0 n 0.0 :if_241_end
+Pixel c 163.0 c 167.0 77.0
+:if_242_start
+If != 77.0 n 255.0 :if_242_end
+Cell Return
+:if_242_end
+:if_241_end
+:if_240_end
+:if_243_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_243_end
+:if_244_start
+Copy 90.0 17.0
+If == 17.0 n 0.0 :if_244_end
+Pixel c 162.0 c 84.0 77.0
+:if_245_start
+If != 77.0 n 255.0 :if_245_end
+Cell Return
+:if_245_end
+:if_244_end
+:if_243_end
+:if_246_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_246_end
+:if_247_start
+Copy 91.0 17.0
+If == 17.0 n 0.0 :if_247_end
+Pixel c 162.0 c 165.0 77.0
+:if_248_start
+If != 77.0 n 255.0 :if_248_end
+Cell Return
+:if_248_end
+:if_247_end
+:if_246_end
+:if_249_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_249_end
+:if_250_start
+Copy 92.0 17.0
+If == 17.0 n 0.0 :if_250_end
+Pixel c 162.0 c 166.0 77.0
+:if_251_start
+If != 77.0 n 255.0 :if_251_end
+Cell Return
+:if_251_end
+:if_250_end
+:if_249_end
+:if_252_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_252_end
+:if_253_start
+Copy 93.0 17.0
+If == 17.0 n 0.0 :if_253_end
+Pixel c 162.0 c 167.0 77.0
+:if_254_start
+If != 77.0 n 255.0 :if_254_end
+Cell Return
+:if_254_end
+:if_253_end
+:if_252_end
+:if_255_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_255_end
+:if_256_start
+Copy 86.0 17.0
+If == 17.0 n 0.0 :if_256_end
+Pixel c 83.0 c 84.0 77.0
+:if_257_start
+If != 77.0 n 255.0 :if_257_end
+Cell Return
+:if_257_end
+:if_256_end
+:if_255_end
+:if_258_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_258_end
+:if_259_start
+Copy 87.0 17.0
+If == 17.0 n 0.0 :if_259_end
+Pixel c 83.0 c 165.0 77.0
+:if_260_start
+If != 77.0 n 255.0 :if_260_end
+Cell Return
+:if_260_end
+:if_259_end
+:if_258_end
+:if_261_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_261_end
+:if_262_start
+Copy 88.0 17.0
+If == 17.0 n 0.0 :if_262_end
+Pixel c 83.0 c 166.0 77.0
+:if_263_start
+If != 77.0 n 255.0 :if_263_end
+Cell Return
+:if_263_end
+:if_262_end
+:if_261_end
+:if_264_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_264_end
+:if_265_start
+Copy 89.0 17.0
+If == 17.0 n 0.0 :if_265_end
+Pixel c 83.0 c 167.0 77.0
+:if_266_start
+If != 77.0 n 255.0 :if_266_end
+Cell Return
+:if_266_end
+:if_265_end
+:if_264_end
+Pixel Cache Raw 1.6777215E7
+:if_267_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_267_end
+Pixel c 83.0 c 84.0 -1.0
+:if_267_end
+:if_268_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_268_end
+Pixel c 162.0 c 84.0 -1.0
+:if_268_end
+:if_269_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_269_end
+Pixel c 163.0 c 84.0 -1.0
+:if_269_end
+:if_270_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_270_end
+Pixel c 164.0 c 84.0 -1.0
+:if_270_end
+:if_271_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_271_end
+Pixel c 83.0 c 165.0 -1.0
+:if_271_end
+:if_272_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_272_end
+Pixel c 162.0 c 165.0 -1.0
+:if_272_end
+:if_273_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_273_end
+Pixel c 163.0 c 165.0 -1.0
+:if_273_end
+:if_274_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_274_end
+Pixel c 164.0 c 165.0 -1.0
+:if_274_end
+:if_275_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_275_end
+Pixel c 83.0 c 166.0 -1.0
+:if_275_end
+:if_276_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_276_end
+Pixel c 162.0 c 166.0 -1.0
+:if_276_end
+:if_277_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_277_end
+Pixel c 163.0 c 166.0 -1.0
+:if_277_end
+:if_278_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_278_end
+Pixel c 164.0 c 166.0 -1.0
+:if_278_end
+:if_279_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_279_end
+Pixel c 83.0 c 167.0 -1.0
+:if_279_end
+:if_280_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_280_end
+Pixel c 162.0 c 167.0 -1.0
+:if_280_end
+:if_281_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_281_end
+Pixel c 163.0 c 167.0 -1.0
+:if_281_end
+:if_282_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_282_end
+Pixel c 164.0 c 167.0 -1.0
+:if_282_end
+Copy 98.0 168.0
+Copy 86.0 169.0
+:if_283_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_283_end
+Init 0.0 86.0
+Init 1.0 98.0
+:if_283_end
+:if_284_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_284_end
+Init 0.0 89.0
+Init 1.0 86.0
+:if_284_end
+:if_285_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_285_end
+Init 0.0 101.0
+Init 1.0 89.0
+:if_285_end
+:if_286_start
+If == 168.0 n 1.0 :if_286_end
+:if_287_start
+If == 169.0 n 0.0 :if_287_end
+Init 0.0 98.0
+:if_287_end
+Init 1.0 101.0
+:if_286_end
+Copy 99.0 168.0
+Copy 90.0 169.0
+:if_288_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_288_end
+Init 0.0 90.0
+Init 1.0 99.0
+:if_288_end
+:if_289_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_289_end
+Init 0.0 88.0
+Init 1.0 90.0
+:if_289_end
+:if_290_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_290_end
+Init 0.0 97.0
+Init 1.0 88.0
+:if_290_end
+:if_291_start
+If == 168.0 n 1.0 :if_291_end
+:if_292_start
+If == 169.0 n 0.0 :if_292_end
+Init 0.0 99.0
+:if_292_end
+Init 1.0 97.0
+:if_291_end
+Copy 100.0 168.0
+Copy 94.0 169.0
+:if_293_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_293_end
+Init 0.0 94.0
+Init 1.0 100.0
+:if_293_end
+:if_294_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_294_end
+Init 0.0 87.0
+Init 1.0 94.0
+:if_294_end
+:if_295_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_295_end
+Init 0.0 93.0
+Init 1.0 87.0
+:if_295_end
+:if_296_start
+If == 168.0 n 1.0 :if_296_end
+:if_297_start
+If == 169.0 n 0.0 :if_297_end
+Init 0.0 100.0
+:if_297_end
+Init 1.0 93.0
+:if_296_end
+Copy 95.0 168.0
+Copy 91.0 169.0
+:if_298_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_298_end
+Init 0.0 91.0
+Init 1.0 95.0
+:if_298_end
+:if_299_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_299_end
+Init 0.0 92.0
+Init 1.0 91.0
+:if_299_end
+:if_300_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_300_end
+Init 0.0 96.0
+Init 1.0 92.0
+:if_300_end
+:if_301_start
+If == 168.0 n 1.0 :if_301_end
+:if_302_start
+If == 169.0 n 0.0 :if_302_end
+Init 0.0 95.0
+:if_302_end
+Init 1.0 96.0
+:if_301_end
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+:f_tetris_rotate_right_0_end
+Cell Return
+:f_tetris_rotate_left_0_start
+Add 83.0 n 1.0 170.0
+Add 83.0 n 2.0 171.0
+Add 83.0 n 3.0 172.0
+Add 84.0 n 1.0 173.0
+Add 84.0 n 2.0 174.0
+Add 84.0 n 3.0 175.0
+:if_303_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_303_end
+:if_304_start
+Copy 89.0 17.0
+If == 17.0 n 0.0 :if_304_end
+Pixel c 83.0 c 175.0 77.0
+:if_305_start
+If != 77.0 n 255.0 :if_305_end
+Cell Return
+:if_305_end
+:if_304_end
+:if_303_end
+:if_306_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_306_end
+:if_307_start
+Copy 88.0 17.0
+If == 17.0 n 0.0 :if_307_end
+Pixel c 83.0 c 174.0 77.0
+:if_308_start
+If != 77.0 n 255.0 :if_308_end
+Cell Return
+:if_308_end
+:if_307_end
+:if_306_end
+:if_309_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_309_end
+:if_310_start
+Copy 87.0 17.0
+If == 17.0 n 0.0 :if_310_end
+Pixel c 83.0 c 173.0 77.0
+:if_311_start
+If != 77.0 n 255.0 :if_311_end
+Cell Return
+:if_311_end
+:if_310_end
+:if_309_end
+:if_312_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_312_end
+:if_313_start
+Copy 86.0 17.0
+If == 17.0 n 0.0 :if_313_end
+Pixel c 83.0 c 84.0 77.0
+:if_314_start
+If != 77.0 n 255.0 :if_314_end
+Cell Return
+:if_314_end
+:if_313_end
+:if_312_end
+:if_315_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_315_end
+:if_316_start
+Copy 93.0 17.0
+If == 17.0 n 0.0 :if_316_end
+Pixel c 170.0 c 175.0 77.0
+:if_317_start
+If != 77.0 n 255.0 :if_317_end
+Cell Return
+:if_317_end
+:if_316_end
+:if_315_end
+:if_318_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_318_end
+:if_319_start
+Copy 92.0 17.0
+If == 17.0 n 0.0 :if_319_end
+Pixel c 170.0 c 174.0 77.0
+:if_320_start
+If != 77.0 n 255.0 :if_320_end
+Cell Return
+:if_320_end
+:if_319_end
+:if_318_end
+:if_321_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_321_end
+:if_322_start
+Copy 91.0 17.0
+If == 17.0 n 0.0 :if_322_end
+Pixel c 170.0 c 173.0 77.0
+:if_323_start
+If != 77.0 n 255.0 :if_323_end
+Cell Return
+:if_323_end
+:if_322_end
+:if_321_end
+:if_324_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_324_end
+:if_325_start
+Copy 90.0 17.0
+If == 17.0 n 0.0 :if_325_end
+Pixel c 170.0 c 84.0 77.0
+:if_326_start
+If != 77.0 n 255.0 :if_326_end
+Cell Return
+:if_326_end
+:if_325_end
+:if_324_end
+:if_327_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_327_end
+:if_328_start
+Copy 97.0 17.0
+If == 17.0 n 0.0 :if_328_end
+Pixel c 171.0 c 175.0 77.0
+:if_329_start
+If != 77.0 n 255.0 :if_329_end
+Cell Return
+:if_329_end
+:if_328_end
+:if_327_end
+:if_330_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_330_end
+:if_331_start
+Copy 96.0 17.0
+If == 17.0 n 0.0 :if_331_end
+Pixel c 171.0 c 174.0 77.0
+:if_332_start
+If != 77.0 n 255.0 :if_332_end
+Cell Return
+:if_332_end
+:if_331_end
+:if_330_end
+:if_333_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_333_end
+:if_334_start
+Copy 95.0 17.0
+If == 17.0 n 0.0 :if_334_end
+Pixel c 171.0 c 173.0 77.0
+:if_335_start
+If != 77.0 n 255.0 :if_335_end
+Cell Return
+:if_335_end
+:if_334_end
+:if_333_end
+:if_336_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_336_end
+:if_337_start
+Copy 94.0 17.0
+If == 17.0 n 0.0 :if_337_end
+Pixel c 171.0 c 84.0 77.0
+:if_338_start
+If != 77.0 n 255.0 :if_338_end
+Cell Return
+:if_338_end
+:if_337_end
+:if_336_end
+:if_339_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_339_end
+:if_340_start
+Copy 101.0 17.0
+If == 17.0 n 0.0 :if_340_end
+Pixel c 172.0 c 175.0 77.0
+:if_341_start
+If != 77.0 n 255.0 :if_341_end
+Cell Return
+:if_341_end
+:if_340_end
+:if_339_end
+:if_342_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_342_end
+:if_343_start
+Copy 100.0 17.0
+If == 17.0 n 0.0 :if_343_end
+Pixel c 172.0 c 174.0 77.0
+:if_344_start
+If != 77.0 n 255.0 :if_344_end
+Cell Return
+:if_344_end
+:if_343_end
+:if_342_end
+:if_345_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_345_end
+:if_346_start
+Copy 99.0 17.0
+If == 17.0 n 0.0 :if_346_end
+Pixel c 172.0 c 173.0 77.0
+:if_347_start
+If != 77.0 n 255.0 :if_347_end
+Cell Return
+:if_347_end
+:if_346_end
+:if_345_end
+:if_348_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_348_end
+:if_349_start
+Copy 98.0 17.0
+If == 17.0 n 0.0 :if_349_end
+Pixel c 172.0 c 84.0 77.0
+:if_350_start
+If != 77.0 n 255.0 :if_350_end
+Cell Return
+:if_350_end
+:if_349_end
+:if_348_end
+Pixel Cache Raw 1.6777215E7
+:if_351_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_351_end
+Pixel c 83.0 c 84.0 -1.0
+:if_351_end
+:if_352_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_352_end
+Pixel c 170.0 c 84.0 -1.0
+:if_352_end
+:if_353_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_353_end
+Pixel c 171.0 c 84.0 -1.0
+:if_353_end
+:if_354_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_354_end
+Pixel c 172.0 c 84.0 -1.0
+:if_354_end
+:if_355_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_355_end
+Pixel c 83.0 c 173.0 -1.0
+:if_355_end
+:if_356_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_356_end
+Pixel c 170.0 c 173.0 -1.0
+:if_356_end
+:if_357_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_357_end
+Pixel c 171.0 c 173.0 -1.0
+:if_357_end
+:if_358_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_358_end
+Pixel c 172.0 c 173.0 -1.0
+:if_358_end
+:if_359_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_359_end
+Pixel c 83.0 c 174.0 -1.0
+:if_359_end
+:if_360_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_360_end
+Pixel c 170.0 c 174.0 -1.0
+:if_360_end
+:if_361_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_361_end
+Pixel c 171.0 c 174.0 -1.0
+:if_361_end
+:if_362_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_362_end
+Pixel c 172.0 c 174.0 -1.0
+:if_362_end
+:if_363_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_363_end
+Pixel c 83.0 c 175.0 -1.0
+:if_363_end
+:if_364_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_364_end
+Pixel c 170.0 c 175.0 -1.0
+:if_364_end
+:if_365_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_365_end
+Pixel c 171.0 c 175.0 -1.0
+:if_365_end
+:if_366_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_366_end
+Pixel c 172.0 c 175.0 -1.0
+:if_366_end
+Copy 89.0 176.0
+Copy 86.0 177.0
+:if_367_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_367_end
+Init 0.0 86.0
+Init 1.0 89.0
+:if_367_end
+:if_368_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_368_end
+Init 0.0 98.0
+Init 1.0 86.0
+:if_368_end
+:if_369_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_369_end
+Init 0.0 101.0
+Init 1.0 98.0
+:if_369_end
+:if_370_start
+If == 176.0 n 1.0 :if_370_end
+:if_371_start
+If == 177.0 n 0.0 :if_371_end
+Init 0.0 89.0
+:if_371_end
+Init 1.0 101.0
+:if_370_end
+Copy 88.0 176.0
+Copy 90.0 177.0
+:if_372_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_372_end
+Init 0.0 90.0
+Init 1.0 88.0
+:if_372_end
+:if_373_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_373_end
+Init 0.0 99.0
+Init 1.0 90.0
+:if_373_end
+:if_374_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_374_end
+Init 0.0 97.0
+Init 1.0 99.0
+:if_374_end
+:if_375_start
+If == 176.0 n 1.0 :if_375_end
+:if_376_start
+If == 177.0 n 0.0 :if_376_end
+Init 0.0 88.0
+:if_376_end
+Init 1.0 97.0
+:if_375_end
+Copy 87.0 176.0
+Copy 94.0 177.0
+:if_377_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_377_end
+Init 0.0 94.0
+Init 1.0 87.0
+:if_377_end
+:if_378_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_378_end
+Init 0.0 100.0
+Init 1.0 94.0
+:if_378_end
+:if_379_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_379_end
+Init 0.0 93.0
+Init 1.0 100.0
+:if_379_end
+:if_380_start
+If == 176.0 n 1.0 :if_380_end
+:if_381_start
+If == 177.0 n 0.0 :if_381_end
+Init 0.0 87.0
+:if_381_end
+Init 1.0 93.0
+:if_380_end
+Copy 92.0 176.0
+Copy 91.0 177.0
+:if_382_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_382_end
+Init 0.0 91.0
+Init 1.0 92.0
+:if_382_end
+:if_383_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_383_end
+Init 0.0 95.0
+Init 1.0 91.0
+:if_383_end
+:if_384_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_384_end
+Init 0.0 96.0
+Init 1.0 95.0
+:if_384_end
+:if_385_start
+If == 176.0 n 1.0 :if_385_end
+:if_386_start
+If == 177.0 n 0.0 :if_386_end
+Init 0.0 92.0
+:if_386_end
+Init 1.0 96.0
+:if_385_end
+Copy 83.0 74.0
+Copy 84.0 75.0
+Cell Call :f_tetris_drawBlock_2_start
+:f_tetris_rotate_left_0_end
+Cell Return
+:f_tetris_drawBlock_2_start
+Add 74.0 n 1.0 178.0
+Add 74.0 n 2.0 179.0
+Add 74.0 n 3.0 180.0
+Add 75.0 n 1.0 181.0
+Add 75.0 n 2.0 182.0
+Add 75.0 n 3.0 183.0
+Pixel Cache c 80.0 c 81.0 c 82.0
+:if_387_start
+Copy 86.0 17.0
+If == 17.0 n 1.0 :if_387_end
+Pixel c 74.0 c 75.0 -1.0
+:if_387_end
+:if_388_start
+Copy 90.0 17.0
+If == 17.0 n 1.0 :if_388_end
+Pixel c 178.0 c 75.0 -1.0
+:if_388_end
+:if_389_start
+Copy 94.0 17.0
+If == 17.0 n 1.0 :if_389_end
+Pixel c 179.0 c 75.0 -1.0
+:if_389_end
+:if_390_start
+Copy 98.0 17.0
+If == 17.0 n 1.0 :if_390_end
+Pixel c 180.0 c 75.0 -1.0
+:if_390_end
+:if_391_start
+Copy 87.0 17.0
+If == 17.0 n 1.0 :if_391_end
+Pixel c 74.0 c 181.0 -1.0
+:if_391_end
+:if_392_start
+Copy 91.0 17.0
+If == 17.0 n 1.0 :if_392_end
+Pixel c 178.0 c 181.0 -1.0
+:if_392_end
+:if_393_start
+Copy 95.0 17.0
+If == 17.0 n 1.0 :if_393_end
+Pixel c 179.0 c 181.0 -1.0
+:if_393_end
+:if_394_start
+Copy 99.0 17.0
+If == 17.0 n 1.0 :if_394_end
+Pixel c 180.0 c 181.0 -1.0
+:if_394_end
+:if_395_start
+Copy 88.0 17.0
+If == 17.0 n 1.0 :if_395_end
+Pixel c 74.0 c 182.0 -1.0
+:if_395_end
+:if_396_start
+Copy 92.0 17.0
+If == 17.0 n 1.0 :if_396_end
+Pixel c 178.0 c 182.0 -1.0
+:if_396_end
+:if_397_start
+Copy 96.0 17.0
+If == 17.0 n 1.0 :if_397_end
+Pixel c 179.0 c 182.0 -1.0
+:if_397_end
+:if_398_start
+Copy 100.0 17.0
+If == 17.0 n 1.0 :if_398_end
+Pixel c 180.0 c 182.0 -1.0
+:if_398_end
+:if_399_start
+Copy 89.0 17.0
+If == 17.0 n 1.0 :if_399_end
+Pixel c 74.0 c 183.0 -1.0
+:if_399_end
+:if_400_start
+Copy 93.0 17.0
+If == 17.0 n 1.0 :if_400_end
+Pixel c 178.0 c 183.0 -1.0
+:if_400_end
+:if_401_start
+Copy 97.0 17.0
+If == 17.0 n 1.0 :if_401_end
+Pixel c 179.0 c 183.0 -1.0
+:if_401_end
+:if_402_start
+Copy 101.0 17.0
+If == 17.0 n 1.0 :if_402_end
+Pixel c 180.0 c 183.0 -1.0
+:if_402_end
+:f_tetris_drawBlock_2_end
+Cell Return
