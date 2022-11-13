@@ -39,7 +39,7 @@ This way is much faster then setting the color every time.
 - [FreeArgParser-Java](https://github.com/krypciak/FreeArgParser-Java)
 - [IGB-Compiler-L1](https://github.com/krypciak/IGB-Compiler-L1)
 - [IGB-Compiler-L2](https://github.com/krypciak/IGB-Compiler-L2)  
-- [Utils](https://github.com/krypciak/Utils)
+- [Java-Utils](https://github.com/krypciak/Java-Utils)
 
 
 # License
